@@ -1,0 +1,66 @@
+[
+    {
+      "name": "Alex Johnson",
+      "role": "Indie Hacker",
+      "reviewText": "GoalTree has completely changed the way I approach goal-setting and long-term planning. The ability to zoom in and out of different time periods is amazing. It’s perfect for keeping my projects on track and aligning them with my 10-year vision.",
+      "rating": 5,
+      "avatarURL": "../public/alexander-hipp-iEEBWgY_6lA-unsplash.jpg"
+    },
+    {
+      "name": "Jamie Lee",
+      "role": "Solopreneur",
+      "reviewText": "I love how GoalTree allows me to plan my weeks with detailed time blocks while keeping my monthly and yearly goals in view. It’s a game-changer for staying focused and productive!",
+      "rating": 4.5,
+      "avatarURL": "../public/adult-1851571_1280.jpg"
+    },
+    {
+      "name": "Taylor Brown",
+      "role": "Freelancer",
+      "reviewText": "The drag-and-drop feature for weekly templates is a lifesaver. I can quickly adjust my schedule and make sure my tasks align with my bigger goals. Highly recommend for anyone managing multiple projects.",
+      "rating": 4,
+      "avatarURL": "../public/happy-1836445_1280.jpg"
+    },
+    {
+      "name": "Amelia Johnson",
+      "role": "Content Creator",
+      "reviewText": "Being able to zoom out and see my 5-year goals alongside my weekly tasks is such a unique and powerful feature. GoalTree is now an essential tool in my workflow.",
+      "rating": 5,
+      "avatarURL": "../public/clay-elliot-mpDV4xaFP8c-unsplash.jpg"
+    },
+    {
+      "name": "Morgan Davis",
+      "role": "Startup Founder",
+      "reviewText": "As a founder, balancing short-term execution with long-term planning is tough. GoalTree makes it easy to track progress across multiple timeframes, from quarterly goals to daily tasks. Fantastic app!",
+      "rating": 4.8,
+      "avatarURL": "../public/linkedin-sales-solutions-pAtA8xe_iVM-unsplash.jpg"
+    },
+    {
+      "name": "Ella Ramirez",
+      "role": "Life Coach",
+      "reviewText": "GoalTree is an incredible tool for personal development. My clients and I use it to set and achieve goals at every level, from 10-year visions to daily tasks. A must-have for goal-oriented individuals.",
+      "rating": 5,
+      "avatarURL": "../public/woman-7350320_1280.jpg"
+    },
+    {
+      "name": "Riley Chen",
+      "role": "Software Developer",
+      "reviewText": "GoalTree’s flexibility and intuitive design are amazing. I use it to organize my coding sprints while keeping my broader career goals in mind. The zoomable calendar is simply brilliant.",
+      "rating": 4.7,
+      "avatarURL": "../public/man-7450033_1280.jpg"
+    },
+    {
+      "name": "Avery Martinez",
+      "role": "Digital Nomad",
+      "reviewText": "This app has made it so much easier to stay productive while traveling. I can track my monthly goals and adjust my weekly schedules on the go. GoalTree has become my go-to planner.",
+      "rating": 4.9,
+      "avatarURL": "../public/jurica-koletic-7YVZYZeITc8-unsplash.jpg"
+    },
+    {
+      "name": "Peyton Brooks",
+      "role": "Entrepreneur",
+      "reviewText": "What sets GoalTree apart is its ability to seamlessly integrate long-term planning with daily execution. I’ve tried countless productivity tools, and this one is a game-changer for entrepreneurs.",
+      "rating": 5,
+      "avatarURL": "../public/portrait-3157821_1280.jpg"
+    }
+  ]
+  
