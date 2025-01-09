@@ -11,7 +11,7 @@ export default function BigPicture() {
         <h2 className='text-center text-5xl font-bold col-start-1 col-end-2'>See the bigger picture.</h2>
         <p className="py-6 text-xl">View your daily tasks alongside your yearly goals. Zoom out to plan the next decade or focus in on the next 15 minutes. 
             <br></br></p>
-            <img src="../public/panel_view_screenshot.png" className="rounded-xl"></img>
+            <img src="/panel_view_screenshot.png" className="rounded-xl"></img>
             </AnimateOnScroll>
         </div>
         </>
