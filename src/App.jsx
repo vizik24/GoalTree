@@ -7,6 +7,7 @@ import Contact from "./Contact";
 import PrivacyPolicy from "./PrivacyPolicy";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
+import { Analytics } from "@vercel/analytics/react"
 
 import "./App.css";
 import LoginPage from "./LoginPage.jsx";
@@ -43,7 +44,9 @@ function App() {
           } />
         </Routes>
       </Router>
+      <Analytics/>
     </AuthProvider>
+    
   );
 }
 
