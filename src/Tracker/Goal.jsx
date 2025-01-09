@@ -73,24 +73,24 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
         {bigCard && (<div className="flex justify-left items-center mt-auto w-full ">
           <div className="flex justify-left items-center mt-auto w-full">
           {priority == 1 ? (
-            <img src="../public/Tracker_assets/Flag_red.svg" alt="Red Flag" className="scale-75"/>
+            <img src="/Tracker_assets/Flag_red.svg" alt="Red Flag" className="scale-75"/>
           ) : priority == 2 ? (
-            <img src="../public/Tracker_assets/Flag_yellow.svg" alt="Yellow Flag" className="scale-75"/>
+            <img src="/Tracker_assets/Flag_yellow.svg" alt="Yellow Flag" className="scale-75"/>
           ) : (
-            <img src="../public/Tracker_assets/Flag_blue.svg" alt="Blue Flag" className="scale-75"/>
+            <img src="/Tracker_assets/Flag_blue.svg" alt="Blue Flag" className="scale-75"/>
           )}
           <button className="btn btn-icon bg-transparent border-transparent p-2" onClick={()=>viewParentClicked(goal.parentGoal)}>
-                    <img src='../public/Tracker_assets/dna.svg' ></img>
+                    <img src='/Tracker_assets/dna.svg' ></img>
                 </button>
 
                 <button className="btn btn-icon bg-transparent border-transparent p-2" onClick={()=>viewMotivationClicked(goal.index)}>
-                    <img src='../public/Tracker_assets/Brain.svg' ></img>
+                    <img src='/Tracker_assets/Brain.svg' ></img>
                 </button>
 
 
 
                 <button className="btn btn-icon bg-transparent border-transparent p-2" onClick={handleDeleteClicked}>
-                    <img src='../public/Tracker_assets/delete.svg' ></img>
+                    <img src='/Tracker_assets/delete.svg' ></img>
                 </button>
           </div>
           <div className="form-control justify-end">
