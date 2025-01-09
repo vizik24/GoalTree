@@ -16,7 +16,7 @@ export default function StayAligned() {
         </AnimateOnScroll>
 
         <AnimateOnScroll animationClass="visible">
-        <img src="../public/motivation_screenshot.png" className="rounded-xl mx-auto m-10"></img>
+        <img src="/motivation_screenshot.png" className="rounded-xl mx-auto m-10"></img>
         </AnimateOnScroll>
         </div>
         

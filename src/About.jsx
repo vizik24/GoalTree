@@ -53,7 +53,7 @@ export default function About() {
             </p>
             <div className="avatar">
               <div className="ring-primary ring-offset-base-100 w-48 h-48 rounded-full ring ring-offset-2 mt-2">
-                <img src="../public/Max.png" />
+                <img src="/Max.png" />
               </div>
             </div>
           </div>

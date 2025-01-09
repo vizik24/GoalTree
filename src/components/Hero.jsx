@@ -22,7 +22,7 @@ export default function Hero() {
      
       </div>
       </div>
-      <img src='../public/linear_tree.png' className="w-full inline-flex mt-10"></img>
+      <img src='/linear_tree.png' className="w-full inline-flex mt-10"></img>
 
     </div>
     </>

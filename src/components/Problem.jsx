@@ -37,8 +37,8 @@ export default function Problem() {
       </ AnimateOnScroll>
       <AnimateOnScroll animationClass='visible'>
       <Diff
-        beforeImage="../public/goal_tree.png"
-        afterImage="../public/stress.jpg"
+        beforeImage="/goal_tree.png"
+        afterImage="/stress.jpg"
       />
       </AnimateOnScroll>
 

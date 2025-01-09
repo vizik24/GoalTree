@@ -11,7 +11,7 @@ export default function DragDrop() {
         <p className="py-6 text-xl">Use GoalsTree outline what you want to achieve. Give your goals parent goals. <br></br>Keep breaking them down until you get to the nitty gritty.
         </p>
 
-            <img src="../public/goal_tree.png" className="rounded-xl"></img>
+            <img src="/goal_tree.png" className="rounded-xl"></img>
 
        
         </div>
