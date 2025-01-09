@@ -42,10 +42,10 @@ export default function Task({ bigCard, tasks, taskIndex, setTasks, highlightGoa
             {bigCard && (<div className="flex justify-between items-center mt-auto">
                 <div className="flex justify-left items-center mt-auto w-full">
                     <button className="btn btn-icon bg-transparent border-transparent p-2" onClick={() => viewParentClicked(parentGoal)}>
-                        <img src='../public/Tracker_assets/dna.svg' alt="View Parent"></img>
+                        <img src='/Tracker_assets/dna.svg' alt="View Parent"></img>
                     </button>
                     <button className="btn btn-icon bg-transparent border-transparent p-2" onClick={handleDeleteClicked}>
-                        <img src='../public/Tracker_assets/delete.svg' alt="Delete Task"></img>
+                        <img src='/Tracker_assets/delete.svg' alt="Delete Task"></img>
                     </button>
                 </div>
                 <div className="form-control">

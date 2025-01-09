@@ -55,7 +55,7 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
       }
   }, [isHighlighted]);
 
-  const goalClassName = isHighlighted ? 'bg-base-100 border-2 border-indigo-500 h-fit w-64 rounded-lg p-2 flex flex-col justify-between m-4' : 'bg-base-100 border-base-100 border h-fit w-64 rounded-lg p-2 flex flex-col justify-between m-4';
+  const goalClassName = isHighlighted ? 'bg-base-100 border-2 inset-0 inset-border border-indigo-500 h-fit w-64 rounded-lg p-2 flex flex-col justify-between m-4' : 'bg-base-100 border-base-100 border h-fit w-64 rounded-lg p-2 flex flex-col justify-between m-4';
 
   function handleDeleteClicked() {
       setGoals(prevGoals => prevGoals.filter(g => g.index !== goalIndex));
@@ -70,7 +70,7 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
         {/* if completed is true render the title with a line through it */}
         <h1 className={`text-lg text-left ${completed==false ? '' : 'line-through'}`}>{title}</h1>
         <p className={` text-sm text-neutral-500 text-left ${completed==false ? '' : 'line-through'}`}>{description}</p>
-        {bigCard && (<div className="flex justify-left items-center mt-auto w-full ">
+        {bigCard && (<div className="flex justify-left items-center mt-auto w-full">
           <div className="flex justify-left items-center mt-auto w-full">
           {priority == 1 ? (
             <img src="/Tracker_assets/Flag_red.svg" alt="Red Flag" className="scale-75"/>
