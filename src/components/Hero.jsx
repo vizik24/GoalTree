@@ -9,7 +9,7 @@ export default function Hero() {
       
       <div className="hero-content text-center">
       <div className="max-w-md">
-      <h1 className="text-5xl font-bold">Acheive big goals, one step at a time.</h1>
+      <h1 className="text-5xl font-bold">Achieve big goals, one step at a time.</h1>
       <p className="py-6">
       Plan your life with precision and flexibility, whether you’re focusing on the next 15 minutes or the next 10 years.
 

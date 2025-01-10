@@ -58,7 +58,7 @@ export default function Stats({
             }
             )}
             </div>
-            <div className="mt-36 col-span-1 grid grid-rows-3 gap-5">
+            <div className="mt-36 col-span-1 grid grid-rows-3 gap-5 sm:grid-cols-1">
             {testimonials.map((testimonial, index) => {
                 if ((index > 2) && (index < 6)) {
                 return (
