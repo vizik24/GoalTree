@@ -98,13 +98,13 @@ export default function Tracker() {
     return (
         <>
         <Nav></Nav>
-        <div className="bg-base-200 p-10">
-            <div className="flex justify-between">
-                <div className="space-x-4">
+        <div className="bg-base-200 p-10 min-h-screen">
+            <div className="flex flex-col md:flex-row justify-between">
+                <div className="space-x-4 md:space-y-2 md:space-x-4">
                     <NewGoalButton handleNewGoalClick={handleNewGoalClick} />
                     <NewTaskButton handleNewTaskClick={handleNewTaskClick} />
                 </div>
-                <div>
+                <div className="mt-4 md:mt-0">
                     <Link to='/contact'>
                         <button className="btn btn-neutral">Feedback</button>
                     </Link>
