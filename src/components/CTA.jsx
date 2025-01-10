@@ -3,7 +3,7 @@ import CtaButton from "./CtaButton";
 export default function CTA() {
   return (
     <div className="m-20">
-      <p className="text-5xl font-bold">Acheive more with GoalsTree</p>
+      <p className="text-5xl font-bold">Acheive more with Goals<span className="text-primary">Tree</span></p>
       <br></br>
       <p className="text-xl">
         Ready to turn your goals into reality? GoalsTree is here to help you

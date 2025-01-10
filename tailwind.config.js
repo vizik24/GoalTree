@@ -14,7 +14,8 @@ export default {
       "cupcake",
       "bumblebee",
       "sunset",
-      "night"
+      "night",
+      "forest"
       // Add more DaisyUI themes as needed
     ],
     darkTheme: "night", // Specify default dark mode theme
