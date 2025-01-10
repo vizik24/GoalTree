@@ -1,6 +1,4 @@
-'use client'
-
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 export default function ImageComparison({
   beforeImage,
@@ -33,30 +31,45 @@ export default function ImageComparison({
     if (!isVisible || isRevealed) return
 
     const handleScroll = (e) => {
-      if (e.deltaY > 0 && position < 100) {
-        e.preventDefault()
-        setPosition((prev) => {
-          const newPosition = prev + e.deltaY * 0.1
-          if (newPosition >= 100) {
-            setIsRevealed(true)
-            return 100
-          }
-          return newPosition
-        })
+      e.preventDefault()
+      updatePosition(e.deltaY * 0.1)
+    }
+
+    const handleTouchMove = (e) => {
+      e.preventDefault()
+      const touch = e.touches[0]
+      const container = containerRef.current
+      if (container) {
+        const containerRect = container.getBoundingClientRect()
+        const touchPosition = (touch.clientY - containerRect.top) / containerRect.height
+        updatePosition((0.5 - touchPosition) * 10)
       }
     }
 
     const currentWrapper = wrapperRef.current
     if (currentWrapper) {
       currentWrapper.addEventListener('wheel', handleScroll, { passive: false })
+      currentWrapper.addEventListener('touchmove', handleTouchMove, { passive: false })
     }
 
     return () => {
       if (currentWrapper) {
         currentWrapper.removeEventListener('wheel', handleScroll)
+        currentWrapper.removeEventListener('touchmove', handleTouchMove)
       }
     }
-  }, [isVisible, isRevealed, position])
+  }, [isVisible, isRevealed])
+
+  const updatePosition = (delta) => {
+    setPosition((prev) => {
+      const newPosition = Math.max(0, Math.min(100, prev + delta))
+      if (newPosition >= 100) {
+        setIsRevealed(true)
+        return 100
+      }
+      return newPosition
+    })
+  }
 
   return (
     <div 
@@ -74,7 +87,7 @@ export default function ImageComparison({
         />
         
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 transition-[clip-path] duration-300 ease-out"
           style={{
             clipPath: `inset(0 ${100 - position}% 0 0)`,
           }}
@@ -87,7 +100,7 @@ export default function ImageComparison({
         </div>
 
         <div 
-          className="absolute inset-y-0 w-1 bg-white"
+          className="absolute inset-y-0 w-1 bg-white transition-[left] duration-300 ease-out"
           style={{ left: `${position}%` }}
         >
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
@@ -100,10 +113,11 @@ export default function ImageComparison({
 
         {!isRevealed && (
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-75 px-4 py-2 rounded-full text-sm font-medium text-neutral-content">
-            V
+            {typeof window !== 'undefined' && 'ontouchstart' in window ? 'Swipe up to reveal' : 'Scroll to reveal'}
           </div>
         )}
       </div>
     </div>
   )
 }
+
