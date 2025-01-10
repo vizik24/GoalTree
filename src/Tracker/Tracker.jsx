@@ -99,7 +99,7 @@ export default function Tracker() {
         <>
         <Nav></Nav>
         <div className="bg-base-200 p-10">
-            <div className="flex justify-between mb-4">
+            <div className="flex justify-between">
                 <div className="space-x-4">
                     <NewGoalButton handleNewGoalClick={handleNewGoalClick} />
                     <NewTaskButton handleNewTaskClick={handleNewTaskClick} />
