@@ -26,9 +26,9 @@ export default function LandingPage() {
         stat1={"Hours saved"}
         stat2={"5 Star reviews"}
         stat3={"New users"}
-        figure1={"10,000+"}
+        figure1={"300+"}
         figure2={"95%"}
-        figure3={"1000+"}
+        figure3={"100+"}
       />
       <CTA></CTA>
       <Footer/>

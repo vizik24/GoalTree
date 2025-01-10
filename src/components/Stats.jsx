@@ -25,7 +25,7 @@ export default function Stats({
             <div className="stat">
             <div className="stat-title">{stat1}</div>
             <div className="stat-value">{figure1}</div>
-            <div className="stat-desc">Dec 1st - Jan 1st</div>
+            <div className="stat-desc">Dec 8th - Jan 10th</div>
             </div>
 
             <div className="stat">
@@ -37,7 +37,7 @@ export default function Stats({
             <div className="stat">
             <div className="stat-title">{stat3}</div>
             <div className="stat-value">{figure3}</div>
-            <div className="stat-desc">Jan 1st - Feb 1st</div>
+            <div className="stat-desc">Jan 8th - Jan 10th</div>
             </div>
         </div>
         <div className="mt-20 grid grid-cols-3 gap-4">
