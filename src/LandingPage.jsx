@@ -17,11 +17,19 @@ export default function LandingPage() {
     <>
       <Nav />
       <Hero />
+      <div className='h-12'></div>
       <Problem />
+      <div className='h-12'></div>
       <BigPicture />
+      <div className='h-12'></div>
+
       {/* <Periodise /> */}
       <StayAligned />
+      <div className='h-12'></div>
+
       <DragDrop />
+      <div className='h-12'></div>
+
       <Stats
         stat1={"Hours saved"}
         stat2={"5 Star reviews"}
@@ -30,6 +38,8 @@ export default function LandingPage() {
         figure2={"95%"}
         figure3={"100+"}
       />
+      <div className='h-12'></div>
+
       <CTA></CTA>
       <Footer/>
     </>

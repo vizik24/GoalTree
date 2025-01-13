@@ -13,9 +13,9 @@ export default function Stats({
 }) {
 return (
     <div className="my-10">
-        <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold m-5 sm:m-10">
-            The fastest growing goal tracking system.
-        </h2>
+        <AnimateOnScroll animationClass="visible">
+          <h2 className='text-center text-5xl font-bold mb-12 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent'>The fastest growing goal setting system.</h2>
+        </AnimateOnScroll>
         <div className="stats stats-vertical lg:stats-horizontal shadow">
             <div className="stat">
                 <div className="stat-title">{stat1}</div>

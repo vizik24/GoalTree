@@ -2,10 +2,9 @@ import AnimateOnScroll from "./AnimateOnScroll"
 
 export default function StayAligned() {
   return (
-    <div className="bg-gradient-to-b from-base-300 to-base-200 py-20">
       <div className="container mx-auto px-4">
         <AnimateOnScroll animationClass="visible">
-          <h2 className='text-center text-5xl font-bold mb-8 text-secondary'>Stay Aligned.</h2>
+          <h2 className='text-center text-5xl font-bold mb-12 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent'>Stay Aligned.</h2>
         </AnimateOnScroll>
 
         <AnimateOnScroll animationClass="visible">
@@ -20,7 +19,6 @@ export default function StayAligned() {
           </div>
         </AnimateOnScroll>
       </div>
-    </div>
   )
 }
 
