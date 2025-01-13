@@ -24,12 +24,15 @@ export default function Problem() {
   }, []);
 
   return (
+    <div className="bg-gradient-to-b from-base-300 to-base-200 py-20">
+
     <div className="problem mt-20">
+      <div className="container mx-auto px-4">
       <AnimateOnScroll animationClass="visible">
-        <h2 className="text-center text-5xl font-bold col-start-1 col-end-2">
-          Got big dreams but struggling to stay on track?
-        </h2>
-      </AnimateOnScroll>
+          <h2 className="text-center text-5xl font-bold mb-12 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            Got big dreams but struggling to stay on track?
+          </h2>
+        </AnimateOnScroll>
       <AnimateOnScroll animationClass="visible">
         <div className={`grid ${isMobile ? "grid-cols-1 gap-8" : "grid-cols-3"} gap-8 my-8`}>
           <p className="col-1">
@@ -49,5 +52,8 @@ export default function Problem() {
         <Diff beforeImage="/goal_tree.png" afterImage="/stress.jpg" />
       </AnimateOnScroll>
     </div>
+    </div>
+    </div>
+
   );
 }
