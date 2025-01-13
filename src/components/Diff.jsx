@@ -78,7 +78,7 @@ export default function ImageComparison({
     >
       <div 
         ref={containerRef} 
-        className="relative w-full max-w-4xl aspect-[16/9] overflow-hidden rounded-lg mt-10"
+        className="relative w-full max-w-5xl aspect-[16/9] overflow-hidden rounded-lg mt-2"
       >
         <img
           src={afterImage}
@@ -100,11 +100,11 @@ export default function ImageComparison({
         </div>
 
         <div 
-          className="absolute inset-y-0 w-1 bg-white transition-[left] duration-300 ease-out"
+          className="absolute inset-y-0 w-0.5 bg-white transition-[left] duration-300 ease-out"
           style={{ left: `${position}%` }}
         >
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white rounded-full shadow-lg flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600">
               <polyline points="15 18 9 12 15 6" />
               <polyline points="9 18 15 12 9 6" />
             </svg>
@@ -112,7 +112,7 @@ export default function ImageComparison({
         </div>
 
         {!isRevealed && (
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-75 px-4 py-2 rounded-full text-sm font-medium text-neutral-content">
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-75 px-3 py-1 rounded-full text-xs font-medium text-neutral-content">
             {typeof window !== 'undefined' && 'ontouchstart' in window ? 'Swipe up to reveal' : 'Scroll to reveal'}
           </div>
         )}
