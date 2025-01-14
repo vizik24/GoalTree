@@ -90,7 +90,7 @@ export default function Tracker() {
     );
 
     const treeView = () => (
-        <TreeView goals={goals}/>
+        <TreeView goals={goals} setGoals={setGoals} />
     );
 
 

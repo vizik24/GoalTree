@@ -19,7 +19,7 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
   let isHighlighted = highlightGoalIndex == goalIndex;
 
   // Get a single goal from the goals array
-  const goal = goals.find(g => g.index === goalIndex);  // Use find to ensure the goal exists
+  const goal = goals.find(g => g.index == goalIndex);  // Use find to ensure the goal exists
 
   // Guard clause to prevent errors if goal is undefined
   if (!goal) {

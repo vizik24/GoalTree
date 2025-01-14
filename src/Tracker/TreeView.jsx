@@ -1,73 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Goal from './Goal';
+import { Tree } from 'react-tree-graph';
 
-function createTreeStructure(goals) {
-    let map = {};
-    let levels = {};
+import 'react-tree-graph/dist/style.css';
 
-    // Initialize map entries for all goals with empty children arrays and undefined levels
-    goals.forEach(goal => {
-        map[goal.index] = {...goal, children: [], level: undefined};
-    });
+function buildNestedArray(data) {
+    // build a nested array from the linked array structure.
+    const itemsById = {};
+    const root = [];
 
-    // First pass: Identify root goals and set level 0
-    goals.forEach(goal => {
-        if (goal.parentGoal == goal.index || goal.parentGoal === null || (goal.parentGoal === "0" && goal.index == "0")) {
-            map[goal.index].level = 0;
-            levels[0] = levels[0] || [];
-            levels[0].push(map[goal.index]);
+    // First map all items by index for quick access
+    data.forEach(item => itemsById[item.index] = { ...item, children: [] });
+
+    // Now build the tree by linking children to their parents
+    data.forEach(item => {
+        if (item.parentGoal == item.index) {
+            root.push(itemsById[item.index]);
+        } else if (itemsById[item.parentGoal]) {
+            itemsById[item.parentGoal].children.push(itemsById[item.index]);
         }
     });
 
-    // Second pass: Set levels for non-root goals
-    let updated;
-    do {
-        updated = false;
-        goals.forEach(goal => {
-            if (map[goal.index].level == undefined && map[goal.parentGoal] && map[goal.parentGoal].level != undefined) {
-                map[goal.index].level = map[goal.parentGoal].level + 1;
-                updated = true;
-                if (!levels[map[goal.index].level]) {
-                    levels[map[goal.index].level] = [];
-                }
-                levels[map[goal.index].level].push(map[goal.index]);
-            }
-        });
-    } while (updated);
-
-    console.log("Final map with all goal details:", map);  // Logging full map
-    console.log("Goals organized by levels:", levels);  // Logging levels
-
-    return { map, levels };
+    return root;
 }
 
-export default function TreeView({ goals }) {
-    const [updatedGoals, setUpdatedGoals] = useState(goals);
-    const { map, levels } = createTreeStructure(updatedGoals);
+
+function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex }) {
+    const [treeData, setTreeData] = useState([]);
+
+    useEffect(() => {
+        if (goals && goals.length > 0) {
+            const tree = buildNestedArray(goals);
+            console.log(tree);
+            setTreeData(tree);
+        }
+    }, [goals]);
+
+    if (!treeData || treeData.length === 0) {
+        return null; // or return some fallback UI
+    }
+
+    const renderGoals = (nodes, level = 0) => {
+        return nodes.map((node) => (
+            <React.Fragment key={node.index}>
+                <div style={{ gridRow: level + 1, marginBottom: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Goal
+                        bigCard={true}
+                        goalIndex={node.index}
+                        goals={goals}
+                        setGoals={setGoals}
+                        setHighlightGoalIndex={setHighlightGoalIndex}
+                        highlightGoalIndex={highlightGoalIndex}
+                    />
+                </div>
+                {node.children && node.children.length > 0 && renderGoals(node.children, level + 1)}
+            </React.Fragment>
+        ));
+    };
 
     return (
-        <>  
-      
-        
-            <div>
-            <div className='badge badge-accent absolute right-28'>Work in Progress</div>
-
-                {Object.keys(levels).sort((a, b) => a - b).map((level) => (
-                    <div key={level} className="flex flex-row justify-start items-center my-2.5">
-                        {levels[level].map(goal => (
-                            <Goal
-                                key={goal.index}
-                                bigCard={true}
-                                goalIndex={goal.index}
-                                goals={updatedGoals}
-                                setGoals={setUpdatedGoals}
-                                highlightGoalIndex={null}
-                                setHighlightGoalIndex={() => {}}
-                            />
-                        ))}
-                    </div>
-                ))}
-            </div>
-        </>
+        <div className='grid gap-10'>
+            {renderGoals(treeData)}
+        </div>
     );
 }
+
+export default TreeView;
