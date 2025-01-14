@@ -41,9 +41,10 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex }
     }
 
     const renderGoals = (nodes, level = 0) => {
+        console.log('node with index 0, children are:', nodes[0].children)
         return nodes.map((node) => (
             <React.Fragment key={node.index}>
-                <div style={{ gridRow: level + 1, marginBottom: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ gridRow: level + 1, gridColumnStart: node.children.length, marginBottom: '10px', display: 'grid', justifyContent: 'center', alignItems: 'center' }}>
                     <Goal
                         bigCard={true}
                         goalIndex={node.index}
@@ -61,8 +62,15 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex }
     return (
         <div className='grid gap-10'>
             {renderGoals(treeData)}
+    
         </div>
     );
 }
 
 export default TreeView;
+
+
+// for rendering:
+// check number of levels in the tree.
+// make grid with 1 column and rows = to numLevels
+// map the 
