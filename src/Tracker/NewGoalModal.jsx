@@ -7,7 +7,7 @@ function NewGoalModal({ goals, setGoals }) {
   const [goalPeriod, setGoalPeriod] = useState();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [parentGoal, setParentGoal] = useState(null)
+  const [parentGoal, setParentGoal] = useState("")
   const [priority, setPriority] = useState("1");
   const [motivation, setMotivation] = useState("");
 
