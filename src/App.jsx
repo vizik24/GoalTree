@@ -13,8 +13,12 @@ import "./App.css";
 import LoginPage from "./LoginPage.jsx";
 import SignUpPage from './SignUpPage.jsx'
 
+import CookieBanner from "./components/CookieBanner.jsx";
+
 function App() {
   return (
+    <>
+    <CookieBanner />
     <AuthProvider>  {/* Wrap all routes with the AuthProvider */}
       <Router>
         <Routes>
@@ -46,6 +50,7 @@ function App() {
       </Router>
       <Analytics/>
     </AuthProvider>
+    </>
     
   );
 }
