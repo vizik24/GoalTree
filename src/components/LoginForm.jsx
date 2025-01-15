@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
 import { auth } from '../firebaseConfig'; // Firebase Authentication
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, setPersistence, browserSessionPersistence, browserLocalPersistence } from 'firebase/auth';
 import { useAuth } from '../context/AuthContext'; // Custom Auth Context
 import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [stayLoggedIn, setStayLoggedIn] = useState(false); // State to keep track of the checkbox
     const [error, setError] = useState('');
 
-    const authContext = useAuth(); // Access AuthContext
-    const navigate = useNavigate(); // React Router navigation
+    const authContext = useAuth();
+    const navigate = useNavigate();
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        setError(''); // Clear previous errors
+        setError('');
 
         try {
+            // Set authentication persistence based on the checkbox
+            const persistenceType = stayLoggedIn ? browserLocalPersistence : browserSessionPersistence;
+            await setPersistence(auth, persistenceType);
+
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             console.log("Logged in user:", userCredential.user);
             authContext.login(userCredential.user); // Update login state in AuthContext
@@ -60,6 +65,17 @@ function LoginForm() {
                                 required
                             />
                         </div>
+                        <div className="form-control">
+                            <label className="label cursor-pointer">
+                                <span className="label-text">Keep me logged in</span>
+                                <input 
+                                    type="checkbox" 
+                                    className="checkbox" 
+                                    checked={stayLoggedIn} 
+                                    onChange={(e) => setStayLoggedIn(e.target.checked)}
+                                />
+                            </label>
+                        </div>
                         <div className="form-control mt-6">
                             <button type="submit" className="btn btn-primary">Login</button>
                         </div>
@@ -68,7 +84,7 @@ function LoginForm() {
                         <p>Don't have an account? 
                             <button 
                                 className="btn btn-link"
-                                onClick={() => navigate('/signup')} // Navigate to sign-up page
+                                onClick={() => navigate('/signup')}
                             >
                                 Sign up
                             </button>

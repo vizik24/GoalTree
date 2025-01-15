@@ -104,7 +104,7 @@ export default function Tracker() {
 
     const treeView = () => (
         <>
-        <div className=" relative top-10 left-10">
+        <div className=" relative top-5 left-10">
         <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut}></ZoomControls>
         </div>
         <TreeView goals={goals} setGoals={setGoals} zoom={zoom} />

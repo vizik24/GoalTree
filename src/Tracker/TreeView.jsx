@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import * as d3 from 'd3';
 import Goal from './Goal';
-import { Plus, Minus } from 'lucide-react';
-import ZoomControls from './ZoomControls';
 
 function buildNestedArray(data) {
     const itemsById = {};
     const root = { name: "Root", children: [] };
 
-    data.forEach(item => itemsById[item.index] = { ...item, children: [] });
+    data.forEach(item => {
+        itemsById[item.index] = { ...item, children: [] };
+    });
 
     data.forEach(item => {
         if (item.parentGoal == item.index) {
@@ -23,7 +23,9 @@ function buildNestedArray(data) {
 
 function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, zoom }) {
     const [treeData, setTreeData] = useState(null);
-    
+    const [isPanning, setIsPanning] = useState(false);
+    const [startPos, setStartPos] = useState({ x: 0, y: 0 });
+    const [translation, setTranslation] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
         if (goals && goals.length > 0) {
@@ -32,22 +34,15 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
         }
     }, [goals]);
 
-    const width = 1200;
-    const height = 900;
-    const nodeWidth = 250;
-    const nodeHeight = 150;
-
-    const hierarchy = useMemo(() => {
-        return treeData ? d3.hierarchy(treeData) : null;
-    }, [treeData]);
+    const hierarchy = useMemo(() => treeData ? d3.hierarchy(treeData) : null, [treeData]);
 
     const treeLayout = useMemo(() => {
         if (!hierarchy) return null;
         return d3.tree()
-            .nodeSize([nodeHeight * 1.5, nodeWidth * 1.5])
+            .nodeSize([150 * 1.5, 250 * 1.5])
             .separation((a, b) => a.parent === b.parent ? 1.2 : 1.5)
             (hierarchy);
-    }, [hierarchy, nodeWidth, nodeHeight]);
+    }, [hierarchy]);
 
     if (!treeLayout) {
         return null;
@@ -56,17 +51,6 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
     const nodes = treeLayout.descendants();
     const links = treeLayout.links();
 
-    // Calculate the bounds of the tree
-    const xMin = d3.min(nodes, d => d.x);
-    const xMax = d3.max(nodes, d => d.x);
-    const yMin = d3.min(nodes, d => d.y);
-    const yMax = d3.max(nodes, d => d.y);
-
-    // Calculate the translation to center the tree
-    const tx = -yMin + nodeWidth / 2;
-    const ty = -xMin + nodeHeight / 2;
-
-    // Function to create a curved path
     const createPath = (sourceX, sourceY, targetX, targetY) => {
         return d3.linkHorizontal()({
             source: [sourceX, sourceY],
@@ -74,37 +58,89 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
         });
     };
 
+    const handleMouseDown = (e) => {
+        const { clientX, clientY } = e;
+        setStartPos({ x: clientX, y: clientY });
+        setIsPanning(true);
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isPanning) return;
+        const { clientX, clientY } = e;
+        const dx = clientX - startPos.x;
+        const dy = clientY - startPos.y;
+
+        setTranslation({
+            x: translation.x + dx,
+            y: translation.y + dy
+        });
+
+        setStartPos({ x: clientX, y: clientY });
+    };
+
+    const handleMouseUp = () => {
+        setIsPanning(false);
+    };
+
+    const handleTouchStart = (e) => {
+        const touch = e.touches[0];
+        setStartPos({ x: touch.clientX, y: touch.clientY });
+        setIsPanning(true);
+    };
+
+    const handleTouchMove = (e) => {
+        if (!isPanning) return;
+        const touch = e.touches[0];
+        const dx = touch.clientX - startPos.x;
+        const dy = touch.clientY - startPos.y;
+
+        setTranslation({
+            x: translation.x + dx,
+            y: translation.y + dy
+        });
+
+        setStartPos({ x: touch.clientX, y: touch.clientY });
+    };
+
+    const handleTouchEnd = () => {
+        setIsPanning(false);
+    };
 
     return (
-
         <div className="relative overflow-auto" style={{ width: '100%', height: '100vh' }}>
-
-            <svg width={yMax - yMin + nodeWidth * 2} height={xMax - xMin + nodeHeight * 2}>
-                <g transform={`translate(${tx}, ${ty}) scale(${zoom})`}>
-                    {links.map((link, i) => {
-                        const path = createPath(link.source.y, link.source.x, link.target.y, link.target.x);
-
-                        return (
-                            <path
-                                key={`link-${i}`}
-                                d={path}
-                                fill="none"
-                                className="stroke-primary"
-                                strokeWidth="1.5"
-                            />
-                        );
-                    })}
+            <svg
+                width={Math.max(1200, nodes.length * 250)}
+                height={Math.max(900, nodes.length * 150)}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                style={{ cursor: isPanning ? 'grabbing' : 'grab' }}
+            >
+                <g transform={`translate(${translation.x}, ${translation.y}) scale(${zoom})`}>
+                    {links.map((link, i) => (
+                        <path
+                            key={`link-${i}`}
+                            d={createPath(link.source.y, link.source.x, link.target.y, link.target.x)}
+                            fill="none"
+                            stroke="currentColor" // Tailwind class for using primary color
+                            className="stroke-primary" // Using Tailwind's class for primary color
+                            strokeWidth="1.5"
+                        />
+                    ))}
                     {nodes.map((node, i) => (
                         <foreignObject
                             key={`node-${i}`}
-                            x={node.y - nodeWidth / 2}
-                            y={node.x - nodeHeight / 2}
-                            width={nodeWidth}
-                            height={nodeHeight}
+                            x={node.y - 125}
+                            y={node.x - 75}
+                            width={250}
+                            height={150}
                         >
                             <div className="w-full h-full flex justify-center items-center">
                                 <Goal
-                                    bigCard={false}
                                     goalIndex={node.data.index}
                                     goals={goals}
                                     setGoals={setGoals}
@@ -121,4 +157,3 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
 }
 
 export default TreeView;
-
