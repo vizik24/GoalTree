@@ -9,6 +9,7 @@ import Tabs from "./Tabs";
 import TreeView from "./TreeView";
 import Nav from "../components/Nav";
 import { Link } from "react-router-dom";
+import ZoomControls from "./ZoomControls";
 
 
 export default function Tracker() {
@@ -83,6 +84,18 @@ export default function Tracker() {
         console.log('New Task Button Clicked');
         document.getElementById('NewTaskModal').showModal();
     }
+    
+    // zoom level for tree view
+    const [zoom, setZoom] = useState(1);
+
+    // handler functions for setting zoom level
+    const handleZoomIn = () => {
+        setZoom(prevZoom => Math.min(prevZoom * 1.2, 3));
+    };
+
+    const handleZoomOut = () => {
+        setZoom(prevZoom => Math.max(prevZoom / 1.2, 0.5));
+    };
 
     // Components for rendering
     const panelView = () => (
@@ -90,7 +103,13 @@ export default function Tracker() {
     );
 
     const treeView = () => (
-        <TreeView goals={goals} setGoals={setGoals} />
+        <>
+        <div className=" relative top-10 left-10">
+        <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut}></ZoomControls>
+        </div>
+        <TreeView goals={goals} setGoals={setGoals} zoom={zoom} />
+        
+        </>
     );
 
 

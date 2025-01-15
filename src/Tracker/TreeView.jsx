@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import * as d3 from 'd3';
 import Goal from './Goal';
+import { Plus, Minus } from 'lucide-react';
+import ZoomControls from './ZoomControls';
 
 function buildNestedArray(data) {
     const itemsById = {};
@@ -19,8 +21,9 @@ function buildNestedArray(data) {
     return root;
 }
 
-function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex }) {
+function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, zoom }) {
     const [treeData, setTreeData] = useState(null);
+    
 
     useEffect(() => {
         if (goals && goals.length > 0) {
@@ -63,21 +66,21 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex }
     const tx = -yMin + nodeWidth / 2;
     const ty = -xMin + nodeHeight / 2;
 
-    // Function to create a curved path with rounded corners
+    // Function to create a curved path
     const createPath = (sourceX, sourceY, targetX, targetY) => {
-        const midX = (sourceX + targetX) / 2;
-        const radius = 16; // 16 pixel radius for rounded corners
-
         return d3.linkHorizontal()({
             source: [sourceX, sourceY],
             target: [targetX, targetY]
         });
     };
 
+
     return (
-        <div className="overflow-auto" style={{ width: '100%', height: '100vh' }}>
+
+        <div className="relative overflow-auto" style={{ width: '100%', height: '100vh' }}>
+
             <svg width={yMax - yMin + nodeWidth * 2} height={xMax - xMin + nodeHeight * 2}>
-                <g transform={`translate(${tx}, ${ty})`}>
+                <g transform={`translate(${tx}, ${ty}) scale(${zoom})`}>
                     {links.map((link, i) => {
                         const path = createPath(link.source.y, link.source.x, link.target.y, link.target.x);
 
