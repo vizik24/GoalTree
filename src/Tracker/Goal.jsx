@@ -11,7 +11,9 @@ import MotivationModal from "./MotivationModal";
  * 
  * @returns {JSX.Element} The rendered Goal component.
  */
-export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoalIndex, setHighlightGoalIndex}) {
+export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoalIndex, setHighlightGoalIndex, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex}) {
+  console.log('adding (goal card)', addChildGoal)
+
 
   console.log('555 - highlighted',highlightGoalIndex)
   console.log('555 - current goal', goalIndex)
@@ -46,6 +48,12 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
           setHighlightGoalIndex(null);
       }, 300);
   };
+
+  function addChildClicked() {
+    setAddChildGoalParentIndex(goalIndex)
+    console.log('adding a child goal to:', addChildGoalParentIndex)
+    addChildGoal(addChildGoalParentIndex)
+  }
 
   const goalRef = useRef(null);
 
@@ -87,10 +95,12 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
                     <img src='/Tracker_assets/Brain.svg' ></img>
                 </button>
 
-
-
                 <button className="btn btn-icon bg-transparent border-transparent p-2" onClick={handleDeleteClicked}>
                     <img src='/Tracker_assets/delete.svg' ></img>
+                </button>
+
+                <button className="btn btn-icon bg-transparent border-transparent p-2" onClick={addChildClicked}>
+                    <img src='/Tracker_assets/addChild.svg' ></img>
                 </button>
           </div>
           <div className="form-control justify-end">

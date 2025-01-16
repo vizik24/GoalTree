@@ -10,6 +10,7 @@ import TreeView from "./TreeView";
 import Nav from "../components/Nav";
 import { Link } from "react-router-dom";
 import ZoomControls from "./ZoomControls";
+import NewChildGoalModal from './NewChildGoalModal'
 
 
 export default function Tracker() {
@@ -63,11 +64,20 @@ export default function Tracker() {
     };
 }, []);
 
+    // state variable to track the index of the goal for which a child goal is being added
+    let [addChildGoalParentIndex, setAddChildGoalParentIndex] = useState('')
+
 
     // Handler functions
     function handleNewGoalClick() {
         console.log('New Goal Button Clicked.');
         document.getElementById('NewGoalModal').showModal();
+    }
+
+    function addChildGoal(goalIndex) {
+        console.log('showing add child goal modal')
+        // setAddChildGoalParentIndex(goalIndex)
+        document.getElementById('NewChildGoalModal').showModal();
     }
 
     function handleNewTaskClick() {
@@ -89,7 +99,7 @@ export default function Tracker() {
 
     // Components for rendering
     const panelView = () => (
-        <PanelView goals={goals} setGoals={setGoals} handleNewGoalClick={handleNewGoalClick} tasks={tasks} setTasks={setTasks} />
+        <PanelView goals={goals} setGoals={setGoals} tasks={tasks} setTasks={setTasks} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex} />
     );
 
     const treeView = () => (
@@ -97,7 +107,7 @@ export default function Tracker() {
         <div className=" relative top-5 left-10">
         <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut}></ZoomControls>
         </div>
-        <TreeView goals={goals} setGoals={setGoals} zoom={zoom} />
+        <TreeView goals={goals} setGoals={setGoals} zoom={zoom} addChildGoal={addChildGoal} />
         
         </>
     );
@@ -119,7 +129,8 @@ export default function Tracker() {
                     </Link>
                 </div>
             </div>
-           
+            <NewChildGoalModal goals={goals} setGoals={setGoals} passedParentGoal={addChildGoalParentIndex} />
+
             <NewGoalModal goals={goals} setGoals={setGoals} />
             <NewTaskModal goals={goals} setGoals={setGoals} tasks={tasks} setTasks={setTasks} />
             <Tabs Component1={panelView} Component2={treeView} />

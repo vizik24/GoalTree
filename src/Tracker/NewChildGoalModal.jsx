@@ -2,14 +2,21 @@ import React, { useEffect, useState } from "react";
 import HelperDropdown from "./HelperDropdown";
 import Goal from "./Goal";
 
-function NewGoalModal({ goals, setGoals}) {
+function NewChildGoalModal({ goals, setGoals, passedParentGoal}) {
+    console.log('passed parent goal is:', passedParentGoal)
+
   const [goalPeriodCat, setGoalPeriodCat] = useState("");
   const [goalPeriod, setGoalPeriod] = useState();
   const [title, setTitle] = useState("Happiness");
   const [description, setDescription] = useState("We believe everyone's life goal should be happiness - add some goals and figure out how to get there.");
-  const [parentGoal, setParentGoal] = useState('0')
+  const [parentGoal, setParentGoal] = useState(passedParentGoal)
   const [priority, setPriority] = useState("1");
   const [motivation, setMotivation] = useState("I so want to do this!");
+
+useEffect(() => {
+    setParentGoal(passedParentGoal);
+    console.log('parent goal is',parentGoal)
+}, [passedParentGoal]);
 
   // filter goals to goals that have not expired (for selecting parent goal)
   const filteredGoals = () => {
@@ -79,13 +86,6 @@ function NewGoalModal({ goals, setGoals}) {
     console.log('month test', currentMonth)
 
 
-    
-
-
-    // console.log('date today is:', today)
-    // console.log('current year is:', currentYear)
-    // console.log('current month is:', currentYearMonth)
-    // console.log('current day is:', currentYearMonthDay)
 
 
   // Function to set goal period according to which accordion is open.
@@ -148,9 +148,9 @@ function NewGoalModal({ goals, setGoals}) {
 
   return (
     <>
-      <dialog id="NewGoalModal" className="modal modal-bottom sm:modal-middle">
+      <dialog id="NewChildGoalModal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Add New Goal</h3>
+          <h3 className="font-bold text-lg">Add New Child Goal</h3>
           <div className="modal-action justify-center">
             <div className="flex flex-col w-full">
               <form method="dialog">
@@ -278,13 +278,13 @@ function NewGoalModal({ goals, setGoals}) {
                 </div>
 
                 {/* parent goal selection */}
-                                <div className="collapse collapse-arrow join-item border-base-300 border">
+                                {/* <div className="collapse collapse-arrow join-item border-base-300 border">
                                       <input type="radio" name="parent-goal-accordian" />
                                       <div className="collapse-title text-xl font-medium">
                                         Parent Goal
                                       </div>
                                       <div className="collapse-content">
-                                        {/* radio buttons with goal cards */}
+                                        
                                         {filteredGoals().map((goal) => (
                                           <label key={goal.index} className="flex items-center space-x-2">
                                             <input
@@ -298,7 +298,7 @@ function NewGoalModal({ goals, setGoals}) {
                                         ))}
                                         
                                       </div>
-                                    </div>
+                                    </div> */}
                 
 
                 <div className="flex justify-center gap-4">
@@ -310,7 +310,7 @@ function NewGoalModal({ goals, setGoals}) {
                   </button>
                   <button
                     className="btn-neutral btn"
-                    onClick={() => document.getElementById("NewGoalModal").close()}
+                    onClick={() => document.getElementById("NewChildGoalModal").close()}
                   >
                     Cancel
                   </button>
@@ -324,4 +324,4 @@ function NewGoalModal({ goals, setGoals}) {
   );
 }
 
-export default NewGoalModal;
+export default NewChildGoalModal;

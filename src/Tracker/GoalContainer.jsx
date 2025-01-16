@@ -2,7 +2,8 @@ import React from "react";
 import Goal from "./Goal";
 import NewGoalButton from "./NewGoalButton";
 
-export default function GoalContainer({ periodCat, period, goals, setGoals, setHighlightGoalIndex, highlightGoalIndex }) {
+export default function GoalContainer({ periodCat, period, goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex }) {
+    console.log('adding (goal container)', addChildGoal)
 
     console.log('goal to highlight at goal container level:', highlightGoalIndex);
     
@@ -52,7 +53,7 @@ export default function GoalContainer({ periodCat, period, goals, setGoals, setH
                     </div>
                 </div>
                 {filteredGoals.map((goal) => (
-                    <Goal bigCard={true} key={goal.index} goalIndex={goal.index} goals={goals} setGoals={setGoals} setHighlightGoalIndex={setHighlightGoalIndex} highlightGoalIndex={highlightGoalIndex}/>
+                    <Goal bigCard={true} key={goal.index} goalIndex={goal.index} goals={goals} setGoals={setGoals} setHighlightGoalIndex={setHighlightGoalIndex} highlightGoalIndex={highlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex}/>
                 ))}
             </div>
         </div>
