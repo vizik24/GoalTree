@@ -129,6 +129,16 @@ function NewGoalModal({ goals, setGoals }) {
       parentGoal: parentGoal
     };
     addGoal(newGoalObject);
+    // reset state to empty
+    setGoalPeriodCat('')
+    setGoalPeriod('')
+    setTitle('')
+    setDescription('')
+    setMotivation('')
+    setParentGoal('')
+    setPriority('1')
+
+
   };
 
   // useEffect to log goals array after it updates
