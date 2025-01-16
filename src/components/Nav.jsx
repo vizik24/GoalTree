@@ -25,7 +25,7 @@ export default function Nav() {
             <li>
               <details>
                 <summary>Menu</summary>
-                <ul className="bg-base-100 rounded-t-none p-2">
+                <ul className="bg-base-100 rounded-t-none p-2 z-20">
                   <li>
                     <Link to='/about'>
                       <a>About</a>
