@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import HelperDropdown from "./HelperDropdown";
 import Goal from "./Goal";
 
-function NewGoalModal({ goals, setGoals }) {
+function NewGoalModal({ goals, setGoals, passedParentGoal = '0' }) {
   const [goalPeriodCat, setGoalPeriodCat] = useState("");
   const [goalPeriod, setGoalPeriod] = useState();
   const [title, setTitle] = useState("Happiness");
   const [description, setDescription] = useState("We believe everyone's life goal should be happiness - add some goals and figure out how to get there.");
-  const [parentGoal, setParentGoal] = useState('0')
+  const [parentGoal, setParentGoal] = useState(passedParentGoal)
   const [priority, setPriority] = useState("1");
   const [motivation, setMotivation] = useState("I so want to do this!");
 
