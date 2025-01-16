@@ -5,9 +5,9 @@ import Goal from "./Goal";
 function NewGoalModal({ goals, setGoals }) {
   const [goalPeriodCat, setGoalPeriodCat] = useState("");
   const [goalPeriod, setGoalPeriod] = useState();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [parentGoal, setParentGoal] = useState("")
+  const [title, setTitle] = useState("Happiness");
+  const [description, setDescription] = useState("We believe everyone's life goal should be happiness - add some goals and figure out how to get there.");
+  const [parentGoal, setParentGoal] = useState('0')
   const [priority, setPriority] = useState("1");
   const [motivation, setMotivation] = useState("");
 

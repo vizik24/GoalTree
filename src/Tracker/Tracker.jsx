@@ -18,17 +18,7 @@ export default function Tracker() {
         const savedGoals = localStorage.getItem("goals");
         return savedGoals ? JSON.parse(savedGoals) : [
             // Default goals if no goals are stored
-            {
-                index: 0,
-                goalPeriodCat: 'day',
-                goalPeriod: '2025-01-06',
-                title: 'Set up add goal functionality',
-                description: 'Add animations to the landing page to make it more engaging',
-                priority: 2,
-                motivation: 'I want to make the landing page more engaging for users',
-                parentGoal: 1,
-                completed: false
-            },
+            
             // Add additional default goals as needed
         ];
     };
