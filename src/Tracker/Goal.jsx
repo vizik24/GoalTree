@@ -1,26 +1,41 @@
+
+
+/**
+ * Goal component that displays a single goal with various actions and details.
+ * 
+ * The following is handled in this component:
+ *  - Ensure the goal exists and prevent errors if it doesn't.
+ *  - Display goal details such as title, description, priority, and completion status.
+ *  - Highlight the goal if it matches the highlightGoalIndex.
+ *  - Provide actions to view motivation, view parent goal, add a child goal, and delete the goal.
+ *  - Manage state for highlighting specific goals and adding child goals.
+ * 
+ * @param {Object} props - The props object.
+ * @param {boolean} props.bigCard - Flag to indicate if the goal is displayed in a larger card format.
+ * @param {number} props.goalIndex - Index of the goal in the goals array.
+ * @param {Array} props.goals - Array of goal objects.
+ * @param {Function} props.setGoals - Function to update the goals state.
+ * @param {number} props.highlightGoalIndex - Index of the goal to be highlighted.
+ * @param {Function} props.setHighlightGoalIndex - Function to update the highlightGoalIndex state.
+ * @param {Function} props.addChildGoal - Function to add a child goal.
+ * @param {number} props.addChildGoalParentIndex - Index of the parent goal to which a child goal is being added.
+ * @param {Function} props.setAddChildGoalParentIndex - Function to update the addChildGoalParentIndex state.
+ * 
+ * @returns {JSX.Element|null} The rendered Goal component or null if the goal doesn't exist.
+ */
+
 import { useState, useRef, useEffect } from "react";
 import MotivationModal from "./MotivationModal";
 
-/**
- * Goal component displays a single goal with its title, priority, and completion status.
- * 
- * @param {Object} props - The component props.
- * @param {number} props.goalIndex - The index of the goal in the goals array.
- * @param {Array} props.goals - The array of goal objects.
- * @param {Function} props.setGoals - The function to update the goals array.
- * 
- * @returns {JSX.Element} The rendered Goal component.
- */
 export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoalIndex, setHighlightGoalIndex, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex}) {
-  console.log('adding (goal card)', addChildGoal)
+  
+   // define a reference to this component - accessed to control highlighting.
+   const goalRef = useRef(null);
 
-
-  console.log('555 - highlighted',highlightGoalIndex)
-  console.log('555 - current goal', goalIndex)
-
+  // initiatalise variable bool variable that tells below code if this goal should be highlighted
   let isHighlighted = highlightGoalIndex == goalIndex;
 
-  // Get a single goal from the goals array
+  // Get a single goal from the goals array, according to the goal index passed in.
   const goal = goals.find(g => g.index == goalIndex);  // Use find to ensure the goal exists
 
   // Guard clause to prevent errors if goal is undefined
@@ -31,40 +46,45 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
   // Destructure the goal object
   const { title, priority, completed, description, parentGoal, motivation } = goal;
 
+  // function to handle the checkbox change event - toggles completed true/false
   function handleCheckboxChange(event) {
       setGoals((prevGoals) =>
           prevGoals.map(g => g.index === goalIndex ? { ...g, completed: !g.completed } : g)
       );
   }
 
+  // function to handle motivation button clicked - display modal of current goal
   function viewMotivationClicked(index) {
     document.getElementById(`${index}-motivation-modal`).showModal()
   }
 
+  // function to handle view parent clicked 
   function viewParentClicked(parentGoal) {
-    console.log('parentGoal 777 is:', parentGoal)
+  // update highlight goal index to the parent of current goal
       setHighlightGoalIndex(parentGoal)
+      // wait 0.3 seconds, then reset the highlighted to null (flash effect)
       setTimeout(() => {
           setHighlightGoalIndex(null);
       }, 300);
   };
 
+  // function to handle clicking the add child goal button - display add child goal modal using the function passed from tracker.
   function addChildClicked() {
     setAddChildGoalParentIndex(goalIndex)
-    console.log('adding a child goal to:', addChildGoalParentIndex)
     addChildGoal(addChildGoalParentIndex)
   }
-
-  const goalRef = useRef(null);
-
+  // when theres a state change, if isHighlited is true and the current goal exists then scroll the current goal into view.
+  // FIXME
   useEffect(() => {
       if (isHighlighted && goalRef.current) {
           goalRef.current.scrollIntoView({ behavior: "smooth", block: 'center' });
       }
   }, [isHighlighted]);
 
+  // define a conditional css class according to if the goal is highlighted (helps keep things concise)
   const goalClassName = isHighlighted ? 'bg-base-100 border-2 inset-0 inset-border border-indigo-500 h-fit w-64 rounded-lg p-2 flex flex-col justify-between m-4' : 'bg-base-100 border-base-100 border h-fit w-64 rounded-lg p-2 flex flex-col justify-between m-4';
 
+  // function to handle delete clicked - updates goals state variable.
   function handleDeleteClicked() {
       setGoals(prevGoals => prevGoals.filter(g => g.index !== goalIndex));
   }

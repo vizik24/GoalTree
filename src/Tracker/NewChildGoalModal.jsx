@@ -1,6 +1,22 @@
+
+
+/**
+ * NewChildGoalModal component for adding a new child goal.
+ * 
+ * The following is handled in this component:
+ *  - Manage state for goal details such as title, description, priority, motivation, and parent goal.
+ *  - Filter goals to display only those that have not expired for selecting a parent goal.
+ *  - Handle changes to goal period based on selected category (year, month, day).
+ *  - Add a new goal to the goals array and reset the form state.
+ * 
+ * @param {Object} props - The props object.
+ * @param {Array} props.goals - Array of goal objects.
+ * @param {Function} props.setGoals - Function to update the goals state.
+ * @param {Object} props.passedParentGoal - The parent goal passed to the modal.
+ * 
+ * @returns {JSX.Element} The rendered NewChildGoalModal component.
+ */
 import React, { useEffect, useState } from "react";
-import HelperDropdown from "./HelperDropdown";
-import Goal from "./Goal";
 
 function NewChildGoalModal({ goals, setGoals, passedParentGoal}) {
     console.log('passed parent goal is:', passedParentGoal)

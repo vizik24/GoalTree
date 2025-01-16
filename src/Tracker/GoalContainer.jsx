@@ -1,20 +1,35 @@
+
+/**
+ * GoalContainer component that displays goals for different time periods (year, month, day).
+ * 
+ * The following is handled in this component:
+ *  - Ensure the period is a string.
+ *  - Calculate today's date and format it for comparison.
+ *  - Filter goals to match only those that are for today's date when periodCat is 'day'.
+ *  - Display goals for the current year, month, or day using the Goal component.
+ *  - Manage state for highlighting specific goals and adding child goals.
+ * 
+ * @param {Object} props - The props object.
+ * @param {string} props.periodCat - The category of the period (year, month, day).
+ * @param {string|number} props.period - The specific period (year, month, day).
+ * @param {Array} props.goals - Array of goal objects.
+ * @param {Function} props.setGoals - Function to update the goals state.
+ * @param {Function} props.setHighlightGoalIndex - Function to update the highlightGoalIndex state.
+ * @param {number} props.highlightGoalIndex - Index of the goal to be highlighted.
+ * @param {boolean} props.addChildGoal - Flag to indicate if a child goal is being added.
+ * @param {number} props.addChildGoalParentIndex - Index of the parent goal to which a child goal is being added.
+ * @param {Function} props.setAddChildGoalParentIndex - Function to update the addChildGoalParentIndex state.
+ * 
+ * @returns {JSX.Element} The rendered GoalContainer component.
+ */
+
 import React from "react";
 import Goal from "./Goal";
-import NewGoalButton from "./NewGoalButton";
 
 export default function GoalContainer({ periodCat, period, goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex }) {
-    console.log('adding (goal container)', addChildGoal)
-
-    console.log('goal to highlight at goal container level:', highlightGoalIndex);
     
     // Ensure period is a string
     period = period.toString();
-
-    // Extract year, month, and day from period based on periodCat
-    const periodYear = period.substring(0, 4);
-    console.log('periodYear is:', periodYear);
-    const periodMonth = (periodCat === 'month' || periodCat === 'day') ? period.slice(5, 7) : null;
-    const periodDay = periodCat === 'day' ? period.slice(8, 10) : null;
 
     // Use today's date to format strings for comparison
     const today = new Date();

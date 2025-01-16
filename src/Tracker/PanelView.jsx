@@ -1,16 +1,37 @@
+
+/**
+ * PanelView component that displays goals and tasks for different time periods (year, month, day).
+ * 
+ * The following is handled in this component:
+ *  - Calculate the current year, month, and day.
+ *  - Calculate the current five-year period dynamically.
+ *  - Display goals for the current year, month, and day using the GoalContainer component.
+ *  - Display tasks using the TaskBreakdown component.
+ *  - Manage state for highlighting specific goals.
+ *  - Pass down necessary props to GoalContainer and TaskBreakdown components, including goals, tasks, and state management functions.
+ * 
+ * @param {Object} props - The props object.
+ * @param {Array} props.goals - Array of goal objects.
+ * @param {Function} props.setGoals - Function to update the goals state.
+ * @param {Array} props.tasks - Array of task objects.
+ * @param {Function} props.setTasks - Function to update the tasks state.
+ * @param {boolean} props.addChildGoal - Flag to indicate if a child goal is being added.
+ * @param {number} props.addChildGoalParentIndex - Index of the parent goal to which a child goal is being added.
+ * @param {Function} props.setAddChildGoalParentIndex - Function to update the addChildGoalParentIndex state.
+ * 
+ * @returns {JSX.Element} The rendered PanelView component.
+ */
 import React, { useState } from "react";
 import GoalContainer from "./GoalContainer"
 import TaskBreakdown from "./TaskBreakdown";
 
 export default function PanelView({goals, setGoals, tasks, setTasks, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex}) {
-    console.log('adding (panel view)', addChildGoal)
     const today = new Date()
 
     // get current year
     const year = today.getFullYear();
     // get current month number
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
-    console.log('period ----- ', month)
     // get current day number
     const day = today.getDate();
 
@@ -19,9 +40,7 @@ export default function PanelView({goals, setGoals, tasks, setTasks, addChildGoa
     const startYear = Math.floor(year / 5) * 5;
     const endYear = startYear + 4;
     const fiveYearString = `${startYear}-${endYear}`;
-    console.log('Five year period is:',fiveYearString);
 
-    console.log('Tasks are-----', tasks)
     // state variable to track which goalIndex to change class to highlighted. default is null.
     const [highlightGoalIndex, setHighlightGoalIndex] = useState(null)
 

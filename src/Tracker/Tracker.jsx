@@ -1,5 +1,24 @@
+/**
+ * Tracker component that manages and displays the main GoalTree app.
+ * 
+ * The following is handled in this component:
+ *  - Load goals and tasks from local storage into state variables.
+ *  - Store goals and tasks in json and update local storage when their state changes.
+ *  - Define handler functions for displaying new goal or task modals. 
+ *          - addChildGoal is passed down to the goal card so it can be used in the button.
+ *  - The state for the zoom of the tree view is handled here and passed down to tree view
+ *      - this allows the zoom buttons to be contained within the tracker div and therefore positioned properly.
+ *  - Handler functions are defined for zoom, which are then passed to the zoom buttons.
+ * 
+ *  - Component variables are defined for tree view and panel view so that they can be passed as props to the tabs component.
+ * 
+ *  - Tabs, toolbar buttons and the modals are added to the DOM. Modals are not rendered and can be done so using showModal() from anywhere.
+ * 
+ * 
+ * This component handles the loading, saving, and updating of goals and tasks from local storage.
+ * It also provides functionality for adding new goals, tasks, and child goals, as well as zoom controls for the tree view.
+ */
 import { useState, useEffect } from "react";
-import GoalContainer from "./GoalContainer"
 import NewGoalButton from "./NewGoalButton";
 import NewGoalModal from "./NewGoalModal";
 import NewTaskButton from "./NewTaskButton";
@@ -14,13 +33,11 @@ import NewChildGoalModal from './NewChildGoalModal'
 
 
 export default function Tracker() {
+    
     // Load initial state from local storage or set default
     const loadGoals = () => {
         const savedGoals = localStorage.getItem("goals");
         return savedGoals ? JSON.parse(savedGoals) : [
-            // Default goals if no goals are stored
-            
-            // Add additional default goals as needed
         ];
     };
 
@@ -76,7 +93,6 @@ export default function Tracker() {
 
     function addChildGoal(goalIndex) {
         console.log('showing add child goal modal')
-        // setAddChildGoalParentIndex(goalIndex)
         document.getElementById('NewChildGoalModal').showModal();
     }
 

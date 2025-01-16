@@ -1,3 +1,17 @@
+/**
+ * Tabs component that renders two tabbed views.
+ * 
+ * The following is handled in this component:
+ *  - Renders two tabs with radio inputs for switching between views.
+ *  - Displays the content of `Component1` in the first tab.
+ *  - Displays the content of `Component2` in the second tab.
+ * 
+ * Props:
+ *  - `Component1`: A React component to be rendered in the first tab.
+ *  - `Component2`: A React component to be rendered in the second tab.
+ * 
+ * This component provides a tabbed interface for switching between two different views.
+ */
 export default function Tabs({ Component1, Component2 }) {
   return (
     <div role="tablist" className="tabs tabs-lifted overflow-scroll">
