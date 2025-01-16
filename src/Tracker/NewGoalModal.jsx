@@ -9,7 +9,7 @@ function NewGoalModal({ goals, setGoals }) {
   const [description, setDescription] = useState("We believe everyone's life goal should be happiness - add some goals and figure out how to get there.");
   const [parentGoal, setParentGoal] = useState('0')
   const [priority, setPriority] = useState("1");
-  const [motivation, setMotivation] = useState("");
+  const [motivation, setMotivation] = useState("I so want to do this!");
 
   // filter goals to goals that have not expired (for selecting parent goal)
   const filteredGoals = () => {
