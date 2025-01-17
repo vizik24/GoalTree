@@ -28,7 +28,7 @@ import { useState, useRef, useEffect } from "react";
 import MotivationModal from "./MotivationModal";
 
 export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoalIndex, setHighlightGoalIndex, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex}) {
-  
+
    // define a reference to this component - accessed to control highlighting.
    const goalRef = useRef(null);
 
@@ -106,7 +106,7 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
   }, [isHighlighted]);
 
   // define a conditional css class according to if the goal is highlighted (helps keep things concise)
-  const goalClassName = isHighlighted ? 'bg-base-100 border-2 inset-0 inset-border border-indigo-500 h-fit w-64 rounded-lg p-2 flex flex-col justify-between m-4' : 'bg-base-100 border-base-100 border h-fit w-64 rounded-lg p-2 flex flex-col justify-between m-4';
+  const goalClassName = isHighlighted ? 'bg-base-100 border-2 inset-0 inset-border border-indigo-500 h-fit max-h-72 w-64 rounded-lg p-2 flex flex-col justify-between m-4' : 'bg-base-100 border-base-100 border h-fit max-h-72 w-64 rounded-lg p-2 flex flex-col justify-between m-4';
 
   // function to handle delete clicked - updates goals state variable.
   function handleDeleteClicked() {
@@ -121,7 +121,7 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
       <div className={goalClassName}>
         {/* if completed is true render the title with a line through it */}
         <h1 className={`text-lg text-left ${completed==false ? '' : 'line-through'}`}>{title}</h1>
-        <p className={` text-sm text-neutral-500 text-left ${completed==false ? '' : 'line-through'}`}>{description}</p>
+        <p className={` text-sm text-neutral-500 text-left truncate ${completed==false ? '' : 'line-through'}`}>{description}</p>
         {bigCard && (<div className="flex justify-left items-center mt-auto w-full">
           <div className="flex justify-left items-center mt-auto w-full">
           {priority == 1 ? (

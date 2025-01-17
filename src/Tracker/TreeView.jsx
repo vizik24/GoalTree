@@ -176,9 +176,9 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
                         <foreignObject
                             key={`node-${i}`}
                             x={node.y - 125}
-                            y={node.x - 75}
+                            y={node.x - 144}
                             width={250}
-                            height={150}
+                            height={288}
                         >
                             <div className="w-full h-full flex justify-center items-center">
                                 <Goal
