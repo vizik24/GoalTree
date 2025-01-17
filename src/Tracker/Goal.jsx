@@ -46,11 +46,35 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
   // Destructure the goal object
   const { title, priority, completed, description, parentGoal, motivation } = goal;
 
-  // function to handle the checkbox change event - toggles completed true/false
+  // function to handle the checkbox change event - toggles completed true/false and sets completed date
   function handleCheckboxChange(event) {
+    // Create a new Date object for the current date and time
+    const today = new Date();
+
+    // Get the current year
+    const currentYear = today.getFullYear();
+
+    // Get the current month (0 indexed) and format it
+    let currentMonth = (today.getMonth() + 1).toString().padStart(2, '0');
+    console.log('month test',today.getMonth().toString().padStart(2, '0'))
+
+    // Get the current day of the month and format it
+    const currentDay = today.getDate().toString().padStart(2, '0');
+
+    // Correctly format the currentYearMonthDay
+    const currentYearMonthDay = `${currentYear}-${currentMonth}-${currentDay}`;
+
       setGoals((prevGoals) =>
           prevGoals.map(g => g.index === goalIndex ? { ...g, completed: !g.completed } : g)
       );
+      // update the completedDate to currentYearMonthDay if completed date is empty, otherwise, empty completedDate.
+      setGoals((prevGoals) =>
+        prevGoals.map(g => 
+            (g.index === goalIndex && g.completedDate == false) 
+                ? { ...g, completedDate: currentYearMonthDay } 
+                : { ...g, completedDate: '' }
+        )
+    );
   }
 
   // function to handle motivation button clicked - display modal of current goal
