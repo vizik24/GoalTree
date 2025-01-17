@@ -98,7 +98,7 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
     addChildGoal(addChildGoalParentIndex)
   }
   // when theres a state change, if isHighlited is true and the current goal exists then scroll the current goal into view.
-  // FIXME
+  // FIXME.
   useEffect(() => {
       if (isHighlighted && goalRef.current) {
           goalRef.current.scrollIntoView({ behavior: "smooth", block: 'center' });
