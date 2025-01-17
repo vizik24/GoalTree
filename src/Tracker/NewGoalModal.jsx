@@ -1,8 +1,26 @@
+
+/**
+ * NewGoalModal component that allows users to add new goals with various attributes.
+ * 
+ * The following is handled in this component:
+ *  - Manage state for goal attributes such as title, description, priority, motivation, and parent goal.
+ *  - Filter goals to only include those that have not expired for selecting a parent goal.
+ *  - Handle changes to goal period based on selected time category (year, month, day).
+ *  - Add a new goal to the goals array and reset the form state after saving.
+ * 
+ * @param {Object} props - The props object.
+ * @param {Array} props.goals - Array of goal objects.
+ * @param {Function} props.setGoals - Function to update the goals state.
+ * 
+ * @returns {JSX.Element} The rendered NewGoalModal component.
+ */
+
 import React, { useEffect, useState } from "react";
-import HelperDropdown from "./HelperDropdown";
 import Goal from "./Goal";
 
 function NewGoalModal({ goals, setGoals}) {
+
+  // define state variables for the goal properties 
   const [goalPeriodCat, setGoalPeriodCat] = useState("");
   const [goalPeriod, setGoalPeriod] = useState();
   const [title, setTitle] = useState("Happiness");
@@ -13,10 +31,15 @@ function NewGoalModal({ goals, setGoals}) {
 
   // filter goals to goals that have not expired (for selecting parent goal)
   const filteredGoals = () => {
+    // create new date object
     const today = new Date();
+    // get current year 
     const currentYear = today.getFullYear();
+    // get current month in 2 digit format
     const currentMonth = (today.getMonth() + 1).toString().padStart(2, '0');
 
+    // filter the goals array based on the goalPeriodCategory of each goal.
+    // return goals that haven't expired.
     return goals.filter((goal) => {
       if (goal.goalPeriodCat === 'day') {
         return goal.goalPeriod >= today;
@@ -38,6 +61,7 @@ function NewGoalModal({ goals, setGoals}) {
 
   // Function to add a goal. Adds a new goal to the goals array.
   function addGoal(newGoalObject) {
+    // update the goals array with the previous goals plus the new goal from a newGoalObject.
     setGoals((prevGoals) => {
       const newGoals = [
         ...prevGoals,
@@ -78,16 +102,6 @@ function NewGoalModal({ goals, setGoals}) {
     currentMonth = `${currentYear}-${currentMonth}`
     console.log('month test', currentMonth)
 
-
-    
-
-
-    // console.log('date today is:', today)
-    // console.log('current year is:', currentYear)
-    // console.log('current month is:', currentYearMonth)
-    // console.log('current day is:', currentYearMonthDay)
-
-
   // Function to set goal period according to which accordion is open.
   const handleRadioChange = (event) => {
     let value = event.target.value
@@ -98,18 +112,21 @@ function NewGoalModal({ goals, setGoals}) {
     setGoalPeriod(currentYearMonthDay)
   };
 
+  // function to handle year change
   const handleYearChange = (event) => {
     const newYear = event.target.value;
     setGoalPeriod(newYear);
     console.log('Goal Period changed to', newYear);  // Log the new value directly
   }
   
+  // function to handle month change
   const handleMonthChange = (event) => {
     const newMonth = event.target.value;
     setGoalPeriod(newMonth);
     console.log('Goal Period changed to', newMonth);  // Log the new value directly
   }
   
+  // function to handle day change.
   const handleDayChange = (event) => {
     const newDay = event.target.value;
     setGoalPeriod(newDay);

@@ -128,8 +128,6 @@ export default function Tracker() {
         </>
     );
 
-
-
     return (
         <>
         <Nav></Nav>

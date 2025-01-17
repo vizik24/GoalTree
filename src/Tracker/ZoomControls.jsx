@@ -1,7 +1,6 @@
 import React from 'react';
 import { Plus, Minus } from 'lucide-react';
 
-
 const ZoomControls = ({ onZoomIn, onZoomOut }) => {
 return (
     <div className="absolute top-4 left-4 flex space-x-2 z-10">
