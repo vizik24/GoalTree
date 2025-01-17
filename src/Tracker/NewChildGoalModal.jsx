@@ -73,7 +73,8 @@ useEffect(() => {
           priority: newGoalObject.priority,
           motivation: newGoalObject.motivation,
           parentGoal: newGoalObject.parentGoal,
-          completed: false,  // completed will always be false when we first create the goal
+          completed: false, // completed will always be false when we first create the goal
+          completedDate: newGoalObject.completedDate,  
         },
       ];
       return newGoals;
@@ -142,7 +143,8 @@ useEffect(() => {
       description,
       priority,
       motivation,
-      parentGoal: parentGoal
+      parentGoal: parentGoal,
+      completedDate: '',
     };
     addGoal(newGoalObject);
     // reset state to empty
