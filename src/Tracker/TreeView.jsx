@@ -1,18 +1,4 @@
-
-
-/**
- * TreeView component renders a hierarchical tree structure using D3.js and React.
- * It supports panning and zooming interactions for better navigation of the tree.
- *
- * @component
- * @param {Object[]} goals - Array of goal objects to be displayed in the tree.
- * @param {Function} setGoals - Function to update the goals state.
- * @param {Function} setHighlightGoalIndex - Function to set the index of the highlighted goal.
- * @param {number} highlightGoalIndex - Index of the currently highlighted goal.
- * @param {number} zoom - Zoom level for scaling the tree.
- * 
- */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import * as d3 from 'd3';
 import Goal from './Goal';
 
@@ -46,16 +32,12 @@ function buildNestedArray(data) {
 }
 
 function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, zoom }) {
-    // define state variable to hold tree data, 
     const [treeData, setTreeData] = useState(null);
-    // state variable to track if panning is active
     const [isPanning, setIsPanning] = useState(false);
-    // state variable to store start position of panning
     const [startPos, setStartPos] = useState({ x: 0, y: 0 });
-    // state to store current translation value for panning
     const [translation, setTranslation] = useState({ x: 0, y: 0 });
+    const svgRef = useRef(null);
 
-    // build tree data when goals change
     useEffect(() => {
         if (goals && goals.length > 0) {
             const tree = buildNestedArray(goals);
@@ -63,10 +45,8 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
         }
     }, [goals]);
 
-    // memoized hierarchy data based on treeData. Memoizing caches the hierarchy to improve performance.
     const hierarchy = useMemo(() => treeData ? d3.hierarchy(treeData) : null, [treeData]);
 
-    // memoized tree layout based on hierarchy
     const treeLayout = useMemo(() => {
         if (!hierarchy) return null;
         return d3.tree()
@@ -75,16 +55,42 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
             (hierarchy);
     }, [hierarchy]);
 
-    // return null is tree layout is not available to avoid fatal errors.
+    useEffect(() => {
+        if (treeLayout && svgRef.current) {
+            const nodes = treeLayout.descendants();
+            const links = treeLayout.links();
+
+            // Calculate the bounding box of the tree
+            let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+            nodes.forEach(node => {
+                minX = Math.min(minX, node.y);
+                maxX = Math.max(maxX, node.y);
+                minY = Math.min(minY, node.x);
+                maxY = Math.max(maxY, node.x);
+            });
+
+            const width = maxX - minX + 500; // Add padding
+            const height = maxY - minY + 300; // Add padding
+
+            // Set the SVG viewBox
+            svgRef.current.setAttribute('viewBox', `${minX - 250} ${minY - 150} ${width} ${height}`);
+
+            // Calculate the center of the tree
+            const centerX = (minX + maxX) / 2;
+            const centerY = (minY + maxY) / 2;
+
+            // Set initial translation to center the tree
+            setTranslation({ x: -centerX, y: -centerY });
+        }
+    }, [treeLayout]);
+
     if (!treeLayout) {
         return null;
     }
 
-    // get nodes and links (edges) from the tree layout
     const nodes = treeLayout.descendants();
     const links = treeLayout.links();
 
-    // function to creare a path between nodes.
     const createPath = (sourceX, sourceY, targetX, targetY) => {
         return d3.linkHorizontal()({
             source: [sourceX, sourceY],
@@ -92,7 +98,6 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
         });
     };
 
-    // mouse events for panning - update panning state
     const handleMouseDown = (e) => {
         const { clientX, clientY } = e;
         setStartPos({ x: clientX, y: clientY });
@@ -117,7 +122,6 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
         setIsPanning(false);
     };
 
-    // touch event handlers for panning
     const handleTouchStart = (e) => {
         const touch = e.touches[0];
         setStartPos({ x: touch.clientX, y: touch.clientY });
@@ -143,10 +147,11 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
     };
 
     return (
-        <div className="relative overflow-auto" style={{ width: '100%', height: '100vh' }}>
+        <div className="relative overflow-hidden" style={{ width: '100%', height: '100vh' }}>
             <svg
-                width={Math.max(1200, nodes.length * 250)}
-                height={Math.max(900, nodes.length * 150)}
+                ref={svgRef}
+                width="100%"
+                height="100%"
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
@@ -162,8 +167,8 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
                             key={`link-${i}`}
                             d={createPath(link.source.y, link.source.x, link.target.y, link.target.x)}
                             fill="none"
-                            stroke="currentColor" // Tailwind class for using primary color
-                            className="stroke-primary" // Using Tailwind's class for primary color
+                            stroke="currentColor"
+                            className="stroke-primary"
                             strokeWidth="1.5"
                         />
                     ))}
@@ -177,6 +182,7 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
                         >
                             <div className="w-full h-full flex justify-center items-center">
                                 <Goal
+                                bigCard={true}
                                     goalIndex={node.data.index}
                                     goals={goals}
                                     setGoals={setGoals}
@@ -193,3 +199,4 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
 }
 
 export default TreeView;
+
