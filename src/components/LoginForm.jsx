@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { auth } from '../firebaseConfig'; // Firebase Authentication
 import { signInWithEmailAndPassword, setPersistence, browserSessionPersistence, browserLocalPersistence } from 'firebase/auth';
 import { useAuth } from '../context/AuthContext'; // Custom Auth Context
@@ -12,6 +12,14 @@ function LoginForm() {
 
     const authContext = useAuth();
     const navigate = useNavigate();
+
+    function handleStayLoggedInCheckboxChange(e) {
+        setStayLoggedIn(e.target.checked)
+    }
+
+    useEffect(() => {
+        console.log('stayLoggedIn updated:', stayLoggedIn);
+      }, [stayLoggedIn]);
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -72,7 +80,8 @@ function LoginForm() {
                                     type="checkbox" 
                                     className="checkbox" 
                                     checked={stayLoggedIn} 
-                                    onChange={(e) => setStayLoggedIn(e.target.checked)}
+                                    onChange={(e) => (
+                                        handleStayLoggedInCheckboxChange(e))}
                                 />
                             </label>
                         </div>
