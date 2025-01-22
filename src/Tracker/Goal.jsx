@@ -25,7 +25,8 @@
  */
 
 import { useState, useRef, useEffect } from "react";
-import MotivationModal from "./MotivationModal";
+import MoreModal from "./MoreModal";
+import EditModal from "./EditModal";
 
 export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoalIndex, setHighlightGoalIndex, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex}) {
 
@@ -44,7 +45,7 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
   }
 
   // Destructure the goal object
-  const { title, priority, completed, description, parentGoal, motivation } = goal;
+  const { title, priority, completed, description, parentGoal, motivation, index } = goal;
 
   // function to handle the checkbox change event - toggles completed true/false and sets completed date
   function handleCheckboxChange(event) {
@@ -78,8 +79,8 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
   }
 
   // function to handle motivation button clicked - display modal of current goal
-  function viewMotivationClicked(index) {
-    document.getElementById(`${index}-motivation-modal`).showModal()
+  function viewMoreClicked(index) {
+    document.getElementById(`${index}-more-modal`).showModal()
   }
 
   // function to handle view parent clicked 
@@ -108,19 +109,21 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
   // define a conditional css class according to if the goal is highlighted (helps keep things concise)
   const goalClassName = isHighlighted ? 'bg-base-100 border-2 inset-0 inset-border border-indigo-500 h-fit max-h-72 w-64 rounded-lg p-2 flex flex-col justify-between m-4' : 'bg-base-100 border-base-100 border h-fit max-h-72 w-64 rounded-lg p-2 flex flex-col justify-between m-4';
 
-  // function to handle delete clicked - updates goals state variable.
-  function handleDeleteClicked() {
-      setGoals(prevGoals => prevGoals.filter(g => g.index !== goalIndex));
-  }
+
 
     return (
       <>
       {/*add motivation modal to the dom so it can be displayed on click of a button */}
-      <MotivationModal title={title} text={motivation} index={goal.index}></MotivationModal>
+      <MoreModal title={title} text={motivation} index={index} setGoals={setGoals} goals={goals}></MoreModal>
+
+
 
       <div className={goalClassName}>
         {/* if completed is true render the title with a line through it */}
+      
         <h1 className={`text-lg text-left ${completed==false ? '' : 'line-through'}`}>{title}</h1>
+          
+     
         <p className={` text-sm text-neutral-500 text-left truncate ${completed==false ? '' : 'line-through'}`}>{description}</p>
         {bigCard && (<div className="flex justify-left items-center mt-auto w-full">
           <div className="flex justify-left items-center mt-auto w-full">
@@ -134,21 +137,16 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
           <button className="btn btn-icon bg-transparent border-transparent p-2" onClick={()=>viewParentClicked(goal.parentGoal)}>
                     <img src='/Tracker_assets/dna.svg' ></img>
                 </button>
-
-                <button className="btn btn-icon bg-transparent border-transparent p-2" onClick={()=>viewMotivationClicked(goal.index)}>
-                    <img src='/Tracker_assets/Brain.svg' ></img>
+                <button className="btn btn-icon bg-transparent border-transparent p-2" onClick={()=>viewMoreClicked(goal.index)}>
+                    <img src='/Tracker_assets/more.svg' ></img>
                 </button>
-
-                <button className="btn btn-icon bg-transparent border-transparent p-2" onClick={handleDeleteClicked}>
-                    <img src='/Tracker_assets/delete.svg' ></img>
-                </button>
+               
 
                 <button className="btn btn-icon bg-transparent border-transparent p-2" onClick={addChildClicked}>
                     <img src='/Tracker_assets/addChild.svg' ></img>
                 </button>
           </div>
           <div className="form-control justify-end">
-          
               
             <input
               type="checkbox"
