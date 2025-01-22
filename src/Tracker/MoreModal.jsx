@@ -21,10 +21,11 @@ import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton"
 import EditModal from "./EditModal";
 
-export default function MoreModal({ title, text, index, setGoals, goals }) {
+export default function MoreModal({ title, description, motivation, priority, parentGoalIndex, index, setGoals, goals }) {
   
   return (
     <>
+    {/* add edit modals to the dom so we can display them when eddit button is pressed. */}
     <EditModal goals={goals} index={index} setGoals={setGoals}></EditModal>
 
     <dialog
@@ -42,7 +43,9 @@ export default function MoreModal({ title, text, index, setGoals, goals }) {
           </div>
 
         </div>
-        <p className="py-2">{text}</p>
+        <p className="py-2 text-sm text-neutral-500">{description}</p>
+        <p className="py-2 text-m">Motivation:</p>
+        <p className="py-2 text-sm text-neutral-500">{motivation}</p>
         <div className="modal-action">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}

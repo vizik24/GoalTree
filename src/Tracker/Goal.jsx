@@ -114,7 +114,11 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
     return (
       <>
       {/*add motivation modal to the dom so it can be displayed on click of a button */}
-      <MoreModal title={title} text={motivation} index={index} setGoals={setGoals} goals={goals}></MoreModal>
+      <MoreModal 
+        title={title} description={description} motivation={motivation} priority={priority}
+        parentGoalIndex={parentGoal} index={index} setGoals={setGoals} goals={goals}>
+
+      </MoreModal>
 
 
 
