@@ -1,20 +1,17 @@
 
 /**
- * PanelView component that displays goals and tasks for different time periods (year, month, day).
+ * PanelView component that displays goals for different time periods (year, month, day).
  * 
  * The following is handled in this component:
  *  - Calculate the current year, month, and day.
  *  - Calculate the current five-year period dynamically.
  *  - Display goals for the current year, month, and day using the GoalContainer component.
- *  - Display tasks using the TaskBreakdown component.
  *  - Manage state for highlighting specific goals.
- *  - Pass down necessary props to GoalContainer and TaskBreakdown components, including goals, tasks, and state management functions.
+ *  - Pass down necessary props to GoalContainer, including goals, and state management functions.
  * 
  * @param {Object} props - The props object.
  * @param {Array} props.goals - Array of goal objects.
  * @param {Function} props.setGoals - Function to update the goals state.
- * @param {Array} props.tasks - Array of task objects.
- * @param {Function} props.setTasks - Function to update the tasks state.
  * @param {boolean} props.addChildGoal - Flag to indicate if a child goal is being added.
  * @param {number} props.addChildGoalParentIndex - Index of the parent goal to which a child goal is being added.
  * @param {Function} props.setAddChildGoalParentIndex - Function to update the addChildGoalParentIndex state.
@@ -23,9 +20,9 @@
  */
 import React, { useState } from "react";
 import GoalContainer from "./GoalContainer"
-import TaskBreakdown from "./TaskBreakdown";
 
-export default function PanelView({goals, setGoals, tasks, setTasks, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex}) {
+
+export default function PanelView({goals, setGoals, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex}) {
     const today = new Date()
 
     // get current year
@@ -55,7 +52,6 @@ export default function PanelView({goals, setGoals, tasks, setTasks, addChildGoa
                 <GoalContainer goals={goals} setGoals={setGoals} periodCat='year' period={year} highlightGoalIndex={highlightGoalIndex} setHighlightGoalIndex={setHighlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex}/>
                 <GoalContainer goals={goals} setGoals={setGoals} periodCat='month' period={month} highlightGoalIndex={highlightGoalIndex} setHighlightGoalIndex={setHighlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex}/>
                 <GoalContainer goals={goals} setGoals={setGoals} periodCat='day' period={day} highlightGoalIndex={highlightGoalIndex} setHighlightGoalIndex={setHighlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex}/>
-                <TaskBreakdown tasks={tasks} setTasks={setTasks} highlightGoalIndex={highlightGoalIndex} setHighlightGoalIndex={setHighlightGoalIndex}></TaskBreakdown>
                 </div>
                 </div>
             </div>
