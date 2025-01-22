@@ -21,13 +21,13 @@ import React, { useEffect, useState } from "react";
 function NewChildGoalModal({ goals, setGoals, passedParentGoal}) {
     console.log('passed parent goal is:', passedParentGoal)
 
-  const [goalPeriodCat, setGoalPeriodCat] = useState("");
-  const [goalPeriod, setGoalPeriod] = useState();
-  const [title, setTitle] = useState("Happiness");
-  const [description, setDescription] = useState("We believe everyone's life goal should be happiness - add some goals and figure out how to get there.");
+  const [goalPeriodCat, setGoalPeriodCat] = useState("year");
+  const [goalPeriod, setGoalPeriod] = useState('2025');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [parentGoal, setParentGoal] = useState(passedParentGoal)
   const [priority, setPriority] = useState("1");
-  const [motivation, setMotivation] = useState("I so want to do this!");
+  const [motivation, setMotivation] = useState("");
 
 useEffect(() => {
     setParentGoal(passedParentGoal);
@@ -148,8 +148,8 @@ useEffect(() => {
     };
     addGoal(newGoalObject);
     // reset state to empty
-    setGoalPeriodCat('')
-    setGoalPeriod('')
+    setGoalPeriodCat('year')
+    setGoalPeriod('2025')
     setTitle('')
     setDescription('')
     setMotivation('')
@@ -229,7 +229,7 @@ useEffect(() => {
                   <p className="label-text left-0 w-fit mb-3 ml-1">Make this goal a:</p>
                   <div className="join join-vertical w-full mb-8">
                     <div className="collapse collapse-arrow join-item border-base-300 border">
-                      <input type="radio" name="my-accordion-4" value={'year'} onChange={handleRadioChange} />
+                      <input defaultChecked type="radio" name="my-accordion-4" value={'year'} onChange={handleRadioChange} />
                       <div className="collapse-title text-xl font-medium">
                         Yearly Goal
                       </div>
