@@ -147,7 +147,7 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
     };
 
     return (
-        <div className="relative overflow-hidden" style={{ width: '100%', height: '100vh' }}>
+        <div className="relative overflow-hidden" style={{ width: '100%', height: '100vh', userSelect: 'none'}}>
             <svg
                 ref={svgRef}
                 width="100%"
