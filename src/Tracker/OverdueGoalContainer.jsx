@@ -42,21 +42,27 @@ export default function OverdueGoalContainer({
   const numericTodayMonth = parseInt(todayMonth, 10);
   const numericTodayDate = parseInt(todayYear + todayMonth + todayDay);
 
-  // Filter goals to match only those where the goalPeriod has passed
-  let filteredGoals = goals.filter((goal) => {
-    // create variable to store numeric version of goal period (without dashes)
-    let numericGoalPeriod = typeof goal.goalPeriod === 'string' ? goal.goalPeriod.replace(/-/g, "") : "";
-    if (goal.goalPeriodCat == "year") {
-      // return goals where goalPeriod is less then numericTodayYear
-      return (numericGoalPeriod < numericTodayYear) && (goal.completed == false);
-    } else if (goal.goalPeriodCat == "month") {
-      // return goals where goalPeriod is less than numericTodayMonth
-      return (numericGoalPeriod < numericTodayMonth)  && (goal.completed == false);
-    } else if (goal.goalPeriodCat == "day") {
-      // return goals where goalPeriod is less than numericTodayDate
-      return (numericGoalPeriod < numericTodayDate)  && (goal.completed == false);
+  // Assuming numericTodayYear, numericTodayMonth, and numericTodayDate are already defined as numeric values.
+
+let filteredGoals = goals.filter((goal) => {
+    // Check if goalPeriod exists and is a string, then replace dashes, else set as empty string
+    let numericGoalPeriod = goal.goalPeriod && typeof goal.goalPeriod === 'string' ? goal.goalPeriod.replace(/-/g, "") : null;
+
+    // Convert numericGoalPeriod to an integer for comparison
+    if (numericGoalPeriod) {
+      numericGoalPeriod = parseInt(numericGoalPeriod, 10);
     }
-  });
+
+    // Filter based on goalPeriodCat
+    if (goal.goalPeriodCat == "year") {
+        return numericGoalPeriod && numericGoalPeriod < numericTodayYear && !goal.completed;
+    } else if (goal.goalPeriodCat == "month") {
+        return numericGoalPeriod && numericGoalPeriod < numericTodayMonth && !goal.completed;
+    } else if (goal.goalPeriodCat == "day") {
+        return numericGoalPeriod && numericGoalPeriod < numericTodayDate && !goal.completed;
+    }
+});
+
 
   return (
     <div className="flex flex-col items-center justify-center w-auto h-full">
