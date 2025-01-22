@@ -49,7 +49,7 @@ export default function MoreModal({ title, description, motivation, priority, pa
         </div>
         <p className="py-2 text-sm text-neutral-500">{description}</p>
         <p className="py-2 text-m">Motivation:</p>
-        <p className="py-2 text-sm text-neutral-500">{motivation}</p>
+        <p className="py-2 text-sm text-neutral-500">{ motivation ? motivation : 'Edit goal to add a motivation.'}</p>
         <div className="modal-action">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
