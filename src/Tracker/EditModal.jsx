@@ -198,7 +198,7 @@ function EditModal({ goals, setGoals, index }) {
                             placeholder={currentGoal.goalPeriod}
                             className="input input-bordered w-full max-w-xs"
                             defaultValue={currentGoal.goalPeriod}
-                            value={currentGoal.goalPeriod}
+                            
                             onChange={handleYearChange}
                             min={2025}
                           />
@@ -227,7 +227,6 @@ function EditModal({ goals, setGoals, index }) {
                             type="month"
                             placeholder={currentGoal.goalPeriod}
                             className="input input-bordered w-full max-w-xs"
-                            value={currentGoal.goalPeriod}
                             defaultValue={currentGoal.goalPeriod}
                             onChange={handleMonthChange}
                           />
@@ -257,7 +256,7 @@ function EditModal({ goals, setGoals, index }) {
                             placeholder={currentGoal.goalPeriod}
                             className="input input-bordered w-full max-w-xs"
                             defaultValue={currentGoal.goalPeriod}
-                            value={currentGoal.goalPeriod}
+                         
                             onChange={handleDayChange}
                           />
                         </label>
