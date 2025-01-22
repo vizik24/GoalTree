@@ -45,16 +45,16 @@ export default function OverdueGoalContainer({
   // Filter goals to match only those where the goalPeriod has passed
   let filteredGoals = goals.filter((goal) => {
     // create variable to store numeric version of goal period (without dashes)
-    let numericGoalPeriod = goal.goalPeriod.replace(/-/g, "");
+    let numericGoalPeriod = typeof goal.goalPeriod === 'string' ? goal.goalPeriod.replace(/-/g, "") : "";
     if (goal.goalPeriodCat == "year") {
       // return goals where goalPeriod is less then numericTodayYear
-      return numericGoalPeriod < numericTodayYear;
+      return (numericGoalPeriod < numericTodayYear) && (goal.completed == false);
     } else if (goal.goalPeriodCat == "month") {
       // return goals where goalPeriod is less than numericTodayMonth
-      return numericGoalPeriod < numericTodayMonth;
+      return (numericGoalPeriod < numericTodayMonth)  && (goal.completed == false);
     } else if (goal.goalPeriodCat == "day") {
       // return goals where goalPeriod is less than numericTodayDate
-      return numericGoalPeriod < numericTodayDate;
+      return (numericGoalPeriod < numericTodayDate)  && (goal.completed == false);
     }
   });
 
