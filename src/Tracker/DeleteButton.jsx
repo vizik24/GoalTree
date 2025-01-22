@@ -7,14 +7,16 @@
  * @returns {JSX.Element|null} The rendered Delete button
  */
 export default function DeleteButton({ setGoals, index }) {
-    // function to handle delete clicked - updates goals state variable.
-    function handleDeleteClicked() {
-    setGoals(prevGoals => prevGoals.filter(g => g.index !== index));
+  
+function displayDeleteModal() {
+    document.getElementById(`${index}-delete-modal`).showModal()
 }
     return (
-        <button className="btn btn-icon bg-transparent border-transparent p-2 w-fit" onClick={handleDeleteClicked}>
+        <>
+        <button className="btn btn-icon bg-transparent border-transparent p-2 w-fit" onClick={displayDeleteModal}>
         <img src='/Tracker_assets/delete.svg' ></img>
         </button>
+        </>
     )
 }
 

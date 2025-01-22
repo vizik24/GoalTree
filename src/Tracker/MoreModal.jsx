@@ -18,6 +18,7 @@
  */
 
 import DeleteButton from "./DeleteButton";
+import DeleteModal from "./DeleteModal";
 import EditButton from "./EditButton"
 import EditModal from "./EditModal";
 
@@ -27,6 +28,9 @@ export default function MoreModal({ title, description, motivation, priority, pa
     <>
     {/* add edit modals to the dom so we can display them when eddit button is pressed. */}
     <EditModal goals={goals} index={index} setGoals={setGoals}></EditModal>
+
+    {/* add delete modal to the dom so we can display them when edit button is pressed */}
+    <DeleteModal setGoals={setGoals} index={index}></DeleteModal>
 
     <dialog
       id={`${index}-more-modal`}
