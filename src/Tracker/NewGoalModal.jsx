@@ -62,10 +62,18 @@ function NewGoalModal({ goals, setGoals}) {
   // Function to add a goal. Adds a new goal to the goals array.
   function addGoal(newGoalObject) {
     // update the goals array with the previous goals plus the new goal from a newGoalObject.
+    let newIndex = 0
     setGoals((prevGoals) => {
-    // set the index to the highest index in prevGoals
-    const highestIndex = Math.max(...prevGoals.map(goal => goal.index));
-    const newIndex = highestIndex + 1;
+      if (prevGoals.length >= 1){
+        // set the index to the highest index in prevGoals
+        const highestIndex = Math.max(...prevGoals.map(goal => goal.index));
+        newIndex = highestIndex + 1;
+      }
+      else {
+        // if there are no previous goals, set index to 0.
+        newIndex = 0
+      }
+    
       const newGoals = [
         ...prevGoals,
         {
