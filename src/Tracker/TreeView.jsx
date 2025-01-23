@@ -31,7 +31,7 @@ function buildNestedArray(data) {
     return root;
 }
 
-function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, zoom }) {
+function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, zoom, bigCards=true }) {
     const [treeData, setTreeData] = useState(null);
     const [isPanning, setIsPanning] = useState(false);
     const [startPos, setStartPos] = useState({ x: 0, y: 0 });
