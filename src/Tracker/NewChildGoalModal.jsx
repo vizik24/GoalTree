@@ -62,10 +62,13 @@ useEffect(() => {
   // Function to add a goal. Adds a new goal to the goals array.
   function addGoal(newGoalObject) {
     setGoals((prevGoals) => {
+     // set the index to the highest index in prevGoals
+    const highestIndex = Math.max(...prevGoals.map(goal => goal.index));
+    const newIndex = highestIndex + 1;
       const newGoals = [
         ...prevGoals,
         {
-          index: prevGoals.length,
+          index: newIndex,
           goalPeriodCat: newGoalObject.goalPeriodCat,
           goalPeriod: newGoalObject.goalPeriod,
           title: newGoalObject.title,

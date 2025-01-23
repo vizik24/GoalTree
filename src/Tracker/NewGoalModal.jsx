@@ -63,10 +63,13 @@ function NewGoalModal({ goals, setGoals}) {
   function addGoal(newGoalObject) {
     // update the goals array with the previous goals plus the new goal from a newGoalObject.
     setGoals((prevGoals) => {
+    // set the index to the highest index in prevGoals
+    const highestIndex = Math.max(...prevGoals.map(goal => goal.index));
+    const newIndex = highestIndex + 1;
       const newGoals = [
         ...prevGoals,
         {
-          index: prevGoals.length,
+          index: newIndex,
           goalPeriodCat: newGoalObject.goalPeriodCat,
           goalPeriod: newGoalObject.goalPeriod,
           title: newGoalObject.title,
@@ -137,6 +140,7 @@ function NewGoalModal({ goals, setGoals}) {
 
   // Function to handle save clicked, creates the new goal object and adds it.
   const handleSave = () => {
+
     const newGoalObject = {
       goalPeriodCat,
       goalPeriod,
