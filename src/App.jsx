@@ -12,6 +12,7 @@ import { Analytics } from "@vercel/analytics/react"
 import "./App.css";
 import LoginPage from "./LoginPage.jsx";
 import SignUpPage from './SignUpPage.jsx'
+import ShareGoalsTree from "./Tracker/ShareGoalsTree.jsx";
 
 import CookieBanner from "./components/CookieBanner.jsx";
 
@@ -39,6 +40,9 @@ function App() {
 
         {/* Public Route for Sign Up */}
         <Route path="/signup" element={<SignUpPage />} />
+
+        {/* Public Route for Shared trees */}
+        <Route path="/sharedTree" element={<ShareGoalsTree />} />
 
           {/* Tracker (Main App) Route */}
           <Route path="/tracker" element={

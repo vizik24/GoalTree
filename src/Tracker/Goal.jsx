@@ -30,6 +30,8 @@ import EditModal from "./EditModal";
 
 export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoalIndex, setHighlightGoalIndex, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex}) {
 
+  // todo - use auth context to only allow changes to goals if the user is signed in.
+
    // define a reference to this component - accessed to control highlighting.
    const goalRef = useRef(null);
 

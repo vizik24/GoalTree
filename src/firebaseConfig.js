@@ -28,4 +28,4 @@ const auth = getAuth(app);
 const analytics = getAnalytics(app);
 
 // Export services
-export { db, auth };
+export {db, auth };

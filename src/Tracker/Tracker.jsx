@@ -18,7 +18,7 @@
  * This component handles the loading, saving, and updating of goals from local storage.
  * It also provides functionality for adding new goals, and child goals, as well as zoom controls for the tree view.
  */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useAuth } from "react";
 import NewGoalButton from "./NewGoalButton";
 import NewGoalModal from "./NewGoalModal";
 import PanelView from "./PanelView";
@@ -28,11 +28,28 @@ import Nav from "../components/Nav";
 import { Link } from "react-router-dom";
 import ZoomControls from "./ZoomControls";
 import NewChildGoalModal from './NewChildGoalModal'
+import ShareButton from "./ShareButton";
 
 
 export default function Tracker() {
+
+    // get userId of current user
+      
     
-    // Load initial state from local storage or set default
+      // Check if user exists and then access user.uid (Firebase typically uses `uid` not `id`)
+    
+
+      // get user document data
+      
+
+      // if there is no 'goals' field in the user document then add the goals from local storage to it.
+
+      // remove goals from local storage once they have been added to firestore.
+
+
+
+    
+    // Load initial state from local storage or set default empty.
     const loadGoals = () => {
         const savedGoals = localStorage.getItem("goals");
         return savedGoals ? JSON.parse(savedGoals) : [
@@ -118,6 +135,7 @@ export default function Tracker() {
                     <Link to='/contact'>
                         <button className="btn btn-neutral">Feedback</button>
                     </Link>
+                    <ShareButton></ShareButton>
                 </div>
             </div>
             <NewChildGoalModal goals={goals} setGoals={setGoals} passedParentGoal={addChildGoalParentIndex} />
