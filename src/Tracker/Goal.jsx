@@ -127,10 +127,9 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
       <div className={goalClassName}>
         {/* if completed is true render the title with a line through it */}
       
-        <h1 className={`text-lg text-left ${completed==false ? '' : 'line-through'}`}>{title}</h1>
+        <h1 className={`text-lg text-left ${completed==false ? '' : 'line-through opacity-15'}`}>{title}</h1>
           
-     
-        <p className={` text-sm text-neutral-500 text-left truncate ${completed==false ? '' : 'line-through'}`}>{description}</p>
+        <p className={` text-sm text-neutral-500 text-left truncate ${completed==false ? '' : 'line-through opacity-15'}`}>{description}</p>
         {bigCard && (<div className="flex justify-left items-center mt-auto w-full">
           <div className="flex justify-left items-center mt-auto w-full">
           {priority == 1 ? (
