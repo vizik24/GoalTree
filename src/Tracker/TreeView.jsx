@@ -182,7 +182,7 @@ function TreeView({ goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, 
                         >
                             <div className="w-full h-full flex justify-center items-center">
                                 <Goal
-                                bigCard={true}
+                                bigCard={bigCards}
                                     goalIndex={node.data.index}
                                     goals={goals}
                                     setGoals={setGoals}
