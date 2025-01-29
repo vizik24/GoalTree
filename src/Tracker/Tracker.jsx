@@ -1,106 +1,95 @@
-import { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
-import NewGoalButton from "./NewGoalButton";
-import NewGoalModal from "./NewGoalModal";
-import PanelView from "./PanelView";
-import Tabs from "./Tabs";
-import TreeView from "./TreeView";
-import Nav from "../components/Nav";
-import { Link } from "react-router-dom";
-import ZoomControls from "./ZoomControls";
-import NewChildGoalModal from "./NewChildGoalModal";
-import ShareButton from "./ShareButton";
+import React, { useState, useEffect } from "react"
+import { useAuth } from "../context/AuthContext"
+import NewGoalButton from "./NewGoalButton"
+import NewGoalModal from "./NewGoalModal"
+import PanelView from "./PanelView"
+import Tabs from "./Tabs"
+import TreeView from "./TreeView"
+import Nav from "../components/Nav"
+import { Link } from "react-router-dom"
+import ZoomControls from "./ZoomControls"
+import NewChildGoalModal from "./NewChildGoalModal"
+import ShareButton from "./ShareButton"
+import ShowCompletedToggle from "./ShowCompletedToggle"
 
-import { getUserData, updateFsGoals } from "./firestore";
+import { getUserData, updateFsGoals } from "./firestore"
 
 export default function Tracker() {
-  // Get the current user from the authentication context
-  const { user } = useAuth();
-  // State to store the user's goals
-  const [goals, setGoals] = useState([]);
-  // State to track if data is still loading
-  const [isLoading, setIsLoading] = useState(true);
+  const { user } = useAuth()
+  const [goals, setGoals] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [addChildGoalParentIndex, setAddChildGoalParentIndex] = useState("0")
+  const [zoom, setZoom] = useState(1)
+  const [completedToggle, setCompletedToggle] = useState(false)
 
   useEffect(() => {
     const fetchUserData = async () => {
       if (user && user.uid) {
         try {
-          // Set loading state to true while fetching data
-          setIsLoading(true);
-          // Fetch user data from Firestore
-          const userData = await getUserData(user.uid);
-          
+          setIsLoading(true)
+          const userData = await getUserData(user.uid)
+
           if (userData && userData.goals) {
-            // If user has goals in Firestore, set them in state
-            setGoals(userData.goals);
-            // Clear local storage as we're now using Firestore data
-            localStorage.removeItem('goals');
+            setGoals(userData.goals)
+            localStorage.removeItem("goals")
           } else {
-            // If no goals in Firestore, check local storage
-            const localGoals = JSON.parse(localStorage.getItem('goals') || '[]');
+            const localGoals = JSON.parse(localStorage.getItem("goals") || "[]")
             if (localGoals.length > 0) {
-              // If goals exist in local storage, update Firestore
-              await updateFsGoals(user.uid, localGoals);
-              // Set local goals in state
-              setGoals(localGoals);
-              // Clear local storage after moving goals to Firestore
-              localStorage.removeItem('goals');
-              console.log("Goals moved from local storage to Firestore");
+              await updateFsGoals(user.uid, localGoals)
+              setGoals(localGoals)
+              localStorage.removeItem("goals")
+              console.log("Goals moved from local storage to Firestore")
             } else {
-              // If no goals in Firestore or local storage, set empty array
-              setGoals([]);
+              setGoals([])
             }
           }
         } catch (error) {
-          console.error("Failed to fetch or update user data:", error);
-          // In case of error, fall back to local storage
-          const localGoals = JSON.parse(localStorage.getItem('goals') || '[]');
-          setGoals(localGoals);
+          console.error("Failed to fetch or update user data:", error)
+          const localGoals = JSON.parse(localStorage.getItem("goals") || "[]")
+          setGoals(localGoals)
         } finally {
-          // Set loading to false after data fetching is complete
-          setIsLoading(false);
+          setIsLoading(false)
         }
       }
-    };
+    }
 
-    // Call the fetchUserData function
-    fetchUserData();
-  }, [user]); // This effect runs when the user changes
+    fetchUserData()
+  }, [user])
 
   useEffect(() => {
-    // Update Firestore whenever goals change and are not empty
-    if (!isLoading && goals.length > 0) {
-      updateFsGoals(user.uid, goals);
+    if (!isLoading && user && user.uid && goals.length > 0) {
+      const updateFirestore = async () => {
+        try {
+          await updateFsGoals(user.uid, goals)
+        } catch (error) {
+          console.error("Failed to update goals in Firestore:", error)
+        }
+      }
+      updateFirestore()
     }
-  }, [goals, isLoading, user.uid]); // This effect runs when goals, isLoading, or user.uid changes
+  }, [goals, isLoading, user])
 
-  // State to track the index of the parent goal when adding a child goal
-  const [addChildGoalParentIndex, setAddChildGoalParentIndex] = useState("0");
-  // State to manage zoom level for the tree view
-  const [zoom, setZoom] = useState(1);
-
-  // Function to handle clicking the new goal button
   const handleNewGoalClick = () => {
-    document.getElementById("NewGoalModal").showModal();
-  };
+    document.getElementById("NewGoalModal").showModal()
+  }
 
-  // Function to handle adding a child goal
   const addChildGoal = (goalIndex) => {
-    setAddChildGoalParentIndex(goalIndex);
-    document.getElementById("NewChildGoalModal").showModal();
-  };
+    setAddChildGoalParentIndex(goalIndex)
+    document.getElementById("NewChildGoalModal").showModal()
+  }
 
-  // Function to handle zooming in
   const handleZoomIn = () => {
-    setZoom((prevZoom) => Math.min(prevZoom * 1.2, 3));
-  };
+    setZoom((prevZoom) => Math.min(prevZoom * 1.2, 3))
+  }
 
-  // Function to handle zooming out
   const handleZoomOut = () => {
-    setZoom((prevZoom) => Math.max(prevZoom / 1.2, 0.5));
-  };
+    setZoom((prevZoom) => Math.max(prevZoom / 1.2, 0.5))
+  }
 
-  // Component for the panel view
+  function handleToggle() {
+    setCompletedToggle((prevState) => !prevState)
+  }
+
   const panelView = () => (
     <PanelView
       goals={goals}
@@ -109,29 +98,30 @@ export default function Tracker() {
       addChildGoalParentIndex={addChildGoalParentIndex}
       setAddChildGoalParentIndex={setAddChildGoalParentIndex}
     />
-  );
+  )
 
-  // Component for the tree view
   const treeView = () => (
     <>
       <div className="relative top-5 left-10">
         <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
+      </div>
+      <div className="relative top-5 right-10">
+        <ShowCompletedToggle handleToggle={handleToggle} toggleValue={completedToggle} />
       </div>
       <TreeView
         goals={goals}
         setGoals={setGoals}
         zoom={zoom}
         addChildGoal={addChildGoal}
+        showCompleted={completedToggle}
       />
     </>
-  );
+  )
 
-  // Show loading state while data is being fetched
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
-  // Render the main component
   return (
     <>
       <Nav />
@@ -147,14 +137,11 @@ export default function Tracker() {
             <ShareButton />
           </div>
         </div>
-        <NewChildGoalModal
-          goals={goals}
-          setGoals={setGoals}
-          passedParentGoal={addChildGoalParentIndex}
-        />
+        <NewChildGoalModal goals={goals} setGoals={setGoals} passedParentGoal={addChildGoalParentIndex} />
         <NewGoalModal goals={goals} setGoals={setGoals} />
         <Tabs Component1={panelView} Component2={treeView} />
       </div>
     </>
-  );
+  )
 }
+
