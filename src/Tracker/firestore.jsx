@@ -1,5 +1,5 @@
 import { db } from "../firebaseConfig";
-import { collection, query, where, getDocs, updateDoc, setDoc, doc, serverTimestamp} from "firebase/firestore";
+import { collection, query, where, getDocs, updateDoc, setDoc, doc, serverTimestamp, arrayUnion, arrayRemove} from "firebase/firestore";
 
 export async function getUserData(uid) {
     // function to get a user data object from firestore given a userId of type string.
@@ -105,8 +105,11 @@ export async function moveLocalToFs(uid) {
 }
 
 
+
 export async function updateGoalProperties(uid, goalIndex, editedGoal) {
   try {
+    console.log("Starting updateGoalProperties with:", { uid, goalIndex, editedGoal })
+
     // First, get the user document reference
     const usersCollectionRef = collection(db, "users")
     const q = query(usersCollectionRef, where("userId", "==", uid))
@@ -117,6 +120,7 @@ export async function updateGoalProperties(uid, goalIndex, editedGoal) {
     }
 
     const userDocRef = querySnapshot.docs[0].ref
+    console.log("User document reference:", userDocRef.path)
 
     // Query fsGoals to get the goal where firestore goalIndex == goalIndex
     const goalQuery = query(
@@ -133,26 +137,43 @@ export async function updateGoalProperties(uid, goalIndex, editedGoal) {
 
     const goalDoc = goalQuerySnapshot.docs[0]
     const goals = goalDoc.data().goals
+    console.log("All goals:", goals)
+
     const oldGoal = goals.find((goal) => goal.index === goalIndex)
 
     if (!oldGoal) {
       throw new Error("Goal not found in the array")
     }
 
+    console.log("Old goal:", oldGoal)
+
     // Replace the goal with editedGoal
     const updatedGoal = { ...oldGoal, ...editedGoal, index: goalIndex }
+    console.log("Updated goal:", updatedGoal)
 
+    // Log each field of the updated goal
+    Object.entries(updatedGoal).forEach(([key, value]) => {
+      console.log(`${key}:`, value)
+      if (value === undefined) {
+        console.warn(`Warning: '${key}' is undefined in the updated goal`)
+      }
+    })
+
+    // Remove the old goal
+    console.log("Removing old goal...")
     await updateDoc(userDocRef, {
       goals: arrayRemove(oldGoal),
     })
 
+    // Add the updated goal
+    console.log("Adding updated goal...")
     await updateDoc(userDocRef, {
       goals: arrayUnion(updatedGoal),
     })
 
     console.log("Goal updated successfully!")
   } catch (error) {
-    console.error("Error updating goal in firestore.", error)
+    console.error("Error updating goal in firestore:", error)
     throw error
   }
 }

@@ -98,6 +98,8 @@ function EditModal({ goals, setGoals, index }) {
     // Update the goals array with the modified goal
     const updatedGoals = goals.map(g => g.index === index ? updatedGoal : g);
     setGoals(updatedGoals);
+
+    console.log('updatedGoal',updatedGoal)
     
     // get current user id
     const { user } = useAuth()
