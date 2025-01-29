@@ -9,7 +9,6 @@
  * @returns {JSX.Element|null} The rendered Delete button
  */
 
-import EditModal from './EditModal'
 
 export default function EditButton({ goals, setGoals, index }) {
     console.log('current index 66  is:', index)

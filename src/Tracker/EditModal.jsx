@@ -12,14 +12,13 @@
  */
 
 import React, { useEffect, useState } from "react";
-import Goal from "./Goal";
+import { updateGoalProperties } from "./firestore";
+import { useAuth } from "../context/AuthContext";
 
 function EditModal({ goals, setGoals, index }) {
-  console.log("goals array is 55", goals);
 
   // filter the goals array to get the current goal
   let currentGoal = goals.find((g) => g.index == index);
-  console.log("current goal is 55", currentGoal);
   
 
   // Define state variables for form fields with initial values from currentGoal
@@ -40,18 +39,15 @@ function EditModal({ goals, setGoals, index }) {
 
   // Get the current month (0 indexed) and format it
   let currentMonth = (today.getMonth() + 1).toString().padStart(2, "0");
-  console.log("month test", today.getMonth().toString().padStart(2, "0"));
 
   // Get the current day of the month and format it
   const currentDay = today.getDate().toString().padStart(2, "0");
 
   // Correctly format the currentYearMonthDay
   const currentYearMonthDay = `${currentYear}-${currentMonth}-${currentDay}`;
-  console.log("Todays date is:", currentYearMonthDay);
 
   // reassign current month to include the current year
   currentMonth = `${currentYear}-${currentMonth}`;
-  console.log("month test", currentMonth);
 
   // Function to set goal period according to which accordion is open.
   const handleRadioChange = (event) => {
@@ -83,7 +79,6 @@ function EditModal({ goals, setGoals, index }) {
   const handleDayChange = (event) => {
     const newDay = event.target.value;
     setGoalPeriod(newDay);
-    console.log("Goal Period changed to", newDay); // Log the new value directly
   };
 
   // Function to handle save clicked, updates the 
@@ -103,6 +98,11 @@ function EditModal({ goals, setGoals, index }) {
     // Update the goals array with the modified goal
     const updatedGoals = goals.map(g => g.index === index ? updatedGoal : g);
     setGoals(updatedGoals);
+    
+    // get current user id
+    const { user } = useAuth()
+    // update goals in firestore with the modified goal
+    updateGoalProperties(user.uid, index, updatedGoal)
   
     // close the modal after saving
     document.getElementById(`${index}-edit-modal`).close();

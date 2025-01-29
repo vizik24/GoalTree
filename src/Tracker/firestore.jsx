@@ -103,3 +103,57 @@ export async function moveLocalToFs(uid) {
         throw error;
     }
 }
+
+
+export async function updateGoalProperties(uid, goalIndex, editedGoal) {
+  try {
+    // First, get the user document reference
+    const usersCollectionRef = collection(db, "users")
+    const q = query(usersCollectionRef, where("userId", "==", uid))
+    const querySnapshot = await getDocs(q)
+
+    if (querySnapshot.empty) {
+      throw new Error("User not found")
+    }
+
+    const userDocRef = querySnapshot.docs[0].ref
+
+    // Query fsGoals to get the goal where firestore goalIndex == goalIndex
+    const goalQuery = query(
+      collection(db, "users"),
+      where("userId", "==", uid),
+      where("goals", "array-contains", { index: goalIndex }),
+    )
+
+    const goalQuerySnapshot = await getDocs(goalQuery)
+
+    if (goalQuerySnapshot.empty) {
+      throw new Error("Goal not found")
+    }
+
+    const goalDoc = goalQuerySnapshot.docs[0]
+    const goals = goalDoc.data().goals
+    const oldGoal = goals.find((goal) => goal.index === goalIndex)
+
+    if (!oldGoal) {
+      throw new Error("Goal not found in the array")
+    }
+
+    // Replace the goal with editedGoal
+    const updatedGoal = { ...oldGoal, ...editedGoal, index: goalIndex }
+
+    await updateDoc(userDocRef, {
+      goals: arrayRemove(oldGoal),
+    })
+
+    await updateDoc(userDocRef, {
+      goals: arrayUnion(updatedGoal),
+    })
+
+    console.log("Goal updated successfully!")
+  } catch (error) {
+    console.error("Error updating goal in firestore.", error)
+    throw error
+  }
+}
+

@@ -69,6 +69,7 @@ export default function Tracker() {
     }
   }, [goals, isLoading, user])
 
+
   const handleNewGoalClick = () => {
     document.getElementById("NewGoalModal").showModal()
   }

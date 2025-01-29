@@ -26,7 +26,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import MoreModal from "./MoreModal";
-import EditModal from "./EditModal";
+
 
 export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoalIndex, setHighlightGoalIndex, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex}) {
 
