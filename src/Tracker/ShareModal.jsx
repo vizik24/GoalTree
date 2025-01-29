@@ -9,9 +9,11 @@
 
 import { useState } from "react";
 
-export default function ShareModal({ link }) {
+export default function ShareModal({ link, xLink }) {
+  console.log('xLink:', xLink)
 
     const [copyButtonText, setCopyButtonText] = useState('Copy Link');
+    const [xShareButtonText, setXShareButtonText] = useState('Share to X')
 
     function copyLinkClicked() {
         navigator.clipboard.writeText(link)
@@ -31,6 +33,19 @@ export default function ShareModal({ link }) {
             });
     }
 
+    function shareToXClicked() {
+      // open xLink in a new tab
+      window.open(xLink, "_blank", "noopener,noreferrer");
+      // update xShareButtonText
+      setXShareButtonText('X opened in new tab')
+
+      setTimeout(() => {
+        setXShareButtonText('Share to X');
+        document.getElementById("share-modal").close();
+      }, 1000); // Delay in milliseconds
+
+    }
+
 
     return (
         <>
@@ -48,6 +63,9 @@ export default function ShareModal({ link }) {
           <form method="dialog" className="grid place-items-center">
             {/* if there is a button in form, it will close the modal */}
             <button type='button' className="btn w-32 btn-neutral" onClick={copyLinkClicked}>{copyButtonText}</button>
+            <br></br>
+            <button type='button' className="btn w-32 btn-neutral" onClick={shareToXClicked}>{xShareButtonText}</button>
+
             <br></br>
             <button className="btn w-32 btn-neutral">Cancel</button>
           </form>

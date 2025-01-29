@@ -18,6 +18,10 @@ export default function ShareButton() {
   // generate a share link from the currentUser.id
   let shareLink = `https://goals-tree.com/sharedTree?userId=${userId}`;
 
+  // generate a url for sharing to X
+  let shareText = "Check out my GoalsTree!";
+  let xShareLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareLink)}`;
+
   function showShareModal() {
     // when button is clicked, display the share modal.
     document.getElementById("share-modal").showModal();
@@ -28,7 +32,7 @@ export default function ShareButton() {
 
   return (
     <>
-      <ShareModal link={shareLink}></ShareModal>
+      <ShareModal link={shareLink} xLink={xShareLink}></ShareModal>
       <button onClick={showShareModal} className="btn btn-secondary">
         Share GoalsTree
       </button>
