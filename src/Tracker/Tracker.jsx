@@ -113,6 +113,8 @@ export default function Tracker() {
         setGoals={setGoals}
         zoom={zoom}
         addChildGoal={addChildGoal}
+        addChildGoalParentIndex={addChildGoalParentIndex}
+        setAddChildGoalParentIndex={setAddChildGoalParentIndex}
         showCompleted={completedToggle}
       />
     </>

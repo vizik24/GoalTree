@@ -38,6 +38,9 @@ function TreeView({
   setGoals,
   setHighlightGoalIndex,
   highlightGoalIndex,
+  addChildGoal, 
+  addChildGoalParentIndex, 
+  setAddChildGoalParentIndex,
   zoom,
   bigCards = true,
   showCompleted = true,
@@ -189,6 +192,9 @@ function TreeView({
             <foreignObject key={`node-${i}`} x={node.y - 125} y={node.x - 144} width={250} height={288}>
               <div className="w-full h-full flex justify-center items-center">
                 <Goal
+                  addChildGoal={addChildGoal} 
+                  addChildGoalParentIndex={addChildGoalParentIndex} 
+                  setAddChildGoalParentIndex={setAddChildGoalParentIndex}
                   bigCard={bigCards}
                   goalIndex={node.data.index}
                   goals={goals}
