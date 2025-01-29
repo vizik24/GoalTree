@@ -1,5 +1,5 @@
 import { db } from "../firebaseConfig";
-import { collection, query, where, getDocs, updateDoc, setDoc, doc} from "firebase/firestore";
+import { collection, query, where, getDocs, updateDoc, setDoc, doc, serverTimestamp} from "firebase/firestore";
 
 export async function getUserData(uid) {
     // function to get a user data object from firestore given a userId of type string.
@@ -34,6 +34,32 @@ export async function updateFsGoals(uid, newGoals) {
         throw error;
     }
 }
+
+export async function updateSharedDate(uid) {
+    try {
+      // First, get the user document reference
+      const usersCollectionRef = collection(db, "users")
+      const q = query(usersCollectionRef, where("userId", "==", uid))
+      const querySnapshot = await getDocs(q)
+  
+      if (querySnapshot.empty) {
+        throw new Error("User not found")
+      }
+  
+      const userDocRef = querySnapshot.docs[0].ref
+  
+      // Update the sharedTime field in the user document
+      // serverTimestamp() will use the server's time, ensuring consistency
+      await updateDoc(userDocRef, {
+        sharedTime: serverTimestamp(),
+      })
+  
+      console.log("SharedTime updated successfully")
+    } catch (error) {
+      console.error("Error updating sharedTime in Firestore", error)
+      throw error
+    }
+  }
 
 
 

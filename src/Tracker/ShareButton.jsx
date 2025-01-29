@@ -7,6 +7,7 @@
 
 import ShareModal from "./ShareModal";
 import { useAuth } from "../context/AuthContext";
+import { updateSharedDate } from "./firestore";
 
 export default function ShareButton() {
   const { user } = useAuth(); // Destructure to get user from the context
@@ -20,6 +21,9 @@ export default function ShareButton() {
   function showShareModal() {
     // when button is clicked, display the share modal.
     document.getElementById("share-modal").showModal();
+
+    // update user's firestore document with sharedDate = current timestamp
+    updateSharedDate(userId)
   }
 
   return (
