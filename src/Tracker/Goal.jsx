@@ -98,7 +98,7 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
   // function to handle clicking the add child goal button - display add child goal modal using the function passed from tracker.
   function addChildClicked() {
     setAddChildGoalParentIndex(goalIndex)
-    addChildGoal(addChildGoalParentIndex)
+    addChildGoal(goalIndex)
   }
   // when theres a state change, if isHighlited is true and the current goal exists then scroll the current goal into view.
   // FIXME.

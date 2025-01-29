@@ -75,7 +75,7 @@ export default function Tracker() {
   }, [goals, isLoading, user.uid]); // This effect runs when goals, isLoading, or user.uid changes
 
   // State to track the index of the parent goal when adding a child goal
-  const [addChildGoalParentIndex, setAddChildGoalParentIndex] = useState("");
+  const [addChildGoalParentIndex, setAddChildGoalParentIndex] = useState("0");
   // State to manage zoom level for the tree view
   const [zoom, setZoom] = useState(1);
 
