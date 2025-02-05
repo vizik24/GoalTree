@@ -7,15 +7,15 @@ import LogoutButton from "./LogoutButton";
 export default function Nav() {
   return (
     <>
-      <div className="navbar bg-base-100">
-        <div className="flex-1">
+      <div className="navbar bg-base-100 w-full justify-between">
+        <div className="justify-start">
           <Link to="/">
             <a className="btn btn-ghost text-xl inline">
               Goals<span className="text-primary">Tree</span>
             </a>
           </Link>
         </div>
-        <div className="flex-none">
+        <div className="">
           <ul className="menu menu-horizontal px-1">
             <li>
               <Link to='/tracker'>
