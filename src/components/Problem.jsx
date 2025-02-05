@@ -27,7 +27,7 @@ export default function Problem() {
 
       <div className="container mx-auto px-4">
       <AnimateOnScroll animationClass="visible">
-          <h2 className="text-center text-5xl font-bold mb-12 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+          <h2 className="text-center text-5xl font-bold mb-12 bg-linear-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
             Got big dreams but struggling to stay on track?
           </h2>
         </AnimateOnScroll>

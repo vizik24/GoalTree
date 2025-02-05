@@ -5,13 +5,13 @@ import Stats from './Stats';
 
 export default function Hero() {
   return (
-    <div className="min-h-fit bg-gradient-to-b from-base-300 via-base-200 to-primary/10">
+    <div className="min-h-fit bg-linear-to-b from-base-300 via-base-200 to-primary/10">
       <div className="hero min-h-[calc(100vh-4rem)] relative">
-        <div className="absolute inset-32 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 blur-3xl"></div>
+        <div className="absolute inset-32 bg-linear-to-r from-primary/10 via-secondary/10 to-accent/10 blur-3xl"></div>
         <div className="hero-content text-center relative z-10">
           <div className="max-w-md mx-auto">
             <h1 className="text-5xl font-bold mb-6">
-              Achieve <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">big goals,</span> one step at a time.
+              Achieve <span className="bg-linear-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">big goals,</span> one step at a time.
             </h1>
             <p className="py-6 text-lg text-base-content/80">
               Set goals with structure, whether you're focusing on the next 15 minutes or the next 10 years.

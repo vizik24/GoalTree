@@ -78,7 +78,7 @@ export default function ImageComparison({
     >
       <div 
         ref={containerRef} 
-        className="relative w-full max-w-5xl aspect-[16/9] overflow-hidden rounded-lg mt-2"
+        className="relative w-full max-w-5xl aspect-16/9 overflow-hidden rounded-lg mt-2"
       >
         <img
           src={afterImage}

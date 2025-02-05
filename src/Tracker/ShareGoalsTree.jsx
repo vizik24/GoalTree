@@ -79,7 +79,7 @@ export default function ShareGoalsTree() {
       <Nav />
       {user ? (
         <>
-          <div className="card w-full bg-base-200 card-md shadow-sm">
+          <div className="card w-full bg-base-200 card-md shadow-xs">
             <div className="card-body">
               <h2 className="card-title inline text-left text-3xl">
                 {user.name} has shared their Goals

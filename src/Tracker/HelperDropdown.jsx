@@ -17,7 +17,7 @@ export default function HelperDropdown({title, description}) {
   </div>
   <div
     tabIndex={0}
-    className="card compact dropdown-content bg-base-100 rounded-box z-[1] w-64 shadow">
+    className="card compact dropdown-content bg-base-100 rounded-box z-1 w-64 shadow-sm">
     <div tabIndex={0} className="card-body">
       <h2 className="card-title">{title}</h2>
       <p>{description}</p>

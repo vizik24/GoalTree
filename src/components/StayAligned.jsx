@@ -4,7 +4,7 @@ export default function StayAligned() {
   return (
       <div className="container mx-auto px-4">
         <AnimateOnScroll animationClass="visible">
-          <h2 className='text-center text-5xl font-bold mb-12 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent'>Stay Aligned.</h2>
+          <h2 className='text-center text-5xl font-bold mb-12 bg-linear-to-r from-primary via-secondary to-accent bg-clip-text text-transparent'>Stay Aligned.</h2>
         </AnimateOnScroll>
 
         <AnimateOnScroll animationClass="visible">

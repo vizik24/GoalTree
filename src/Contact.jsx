@@ -40,7 +40,7 @@ function ContactForm() {
         <Nav />
         <div className="flex flex-col min-h-screen">
             
-            <div className="flex-grow flex justify-center">
+            <div className="grow flex justify-center">
                 
                 <div className="container mx-auto px-4 py-8">
                 <h1 className='text-5xl font-bold mb-10'>Get in touch</h1>
