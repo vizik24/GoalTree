@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import CtaButton from "./CtaButton";
+import Stats from './Stats';
 
 export default function Hero() {
   return (
