@@ -50,12 +50,6 @@ function NewChildGoalModal({ goals, setGoals, passedParentGoal }) {
     });
   };
 
-  // function to handle parent goal when it is selected.
-  function handleParentGoalSelected(value) {
-    setParentGoal(value);
-    console.log("parent goal selected 99", value);
-  }
-
   // Function to add a goal. Adds a new goal to the goals array.
   function addGoal(newGoalObject) {
     let newIndex = 0;

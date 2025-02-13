@@ -61,6 +61,58 @@ export async function updateSharedDate(uid) {
     }
   }
 
+export async function deleteGoal(uid, goalIndex) {
+  console.log('deleting goal', goalIndex)
+  try {
+
+    // First, get the user document reference
+    const usersCollectionRef = collection(db, "users")
+    const q = query(usersCollectionRef, where("userId", "==", uid))
+    const querySnapshot = await getDocs(q)
+
+    if (querySnapshot.empty) {
+      throw new Error("User not found")
+    }
+
+    const userDocRef = querySnapshot.docs[0].ref
+    console.log("User document reference:", userDocRef.path)
+
+    // Query fsGoals to get the goal where firestore goalIndex == goalIndex
+    const goalQuery = query(
+      collection(db, "users"),
+      where("userId", "==", uid),
+    )
+
+    const goalQuerySnapshot = await getDocs(goalQuery)
+
+    if (goalQuerySnapshot.empty) {
+      throw new Error("Goal not found")
+    }
+
+    const goalDoc = goalQuerySnapshot.docs[0]
+    const goals = goalDoc.data().goals
+    console.log("All goals:", goals)
+
+    const oldGoal = goals.find((goal) => goal.index == goalIndex)
+
+    if (!oldGoal) {
+      throw new Error("Goal not found in the array")
+    }
+
+    console.log("Old goal:", oldGoal)
+
+
+    // Remove the old goal
+    console.log("Removing old goal...")
+    await updateDoc(userDocRef, {
+      goals: arrayRemove(oldGoal),
+    })}
+    catch (error) {
+      console.error("Error deleting goal from firestore:", error)
+      throw error
+    }
+}
+
 
 
 export async function moveLocalToFs(uid) {
