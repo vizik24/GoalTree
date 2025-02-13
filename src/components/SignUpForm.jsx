@@ -77,7 +77,6 @@ function SignUpForm() {
                             />
                         </div>
                         <div className="form-control">
-                            
                             <input 
                                 type="password" 
                                 placeholder="Password" 
