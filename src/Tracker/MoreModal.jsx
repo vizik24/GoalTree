@@ -24,6 +24,7 @@ import EditButton from "./EditButton"
 import EditModal from "./EditModal";
 
 export default function MoreModal({setGoals, goals, index }) {
+  console.log('more modal received index', index)
 
   const [title, setTitle] = useState(goals[index] ? goals[index].title : '')
   const [description, setDescription] = useState(goals[index] ? goals[index].description : '')
@@ -36,7 +37,7 @@ export default function MoreModal({setGoals, goals, index }) {
     setDescription(goals[index] ? goals[index].description : '')
     setMotivation(goals[index] ? goals[index].motivation : 'Edit goal to add a motivation.')
     setGoalIndex(goals[index] ? index : null)
-  }, goals.length)
+  }, [goals.length, index])
 
 
   return (

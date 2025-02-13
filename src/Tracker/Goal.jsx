@@ -82,6 +82,7 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
 
   // function to handle motivation button clicked - display modal of current goal
   function viewMoreClicked(index) {
+    console.log('view more clicked. index is:', index)
     setMoreModalIndex(index)
     showMoreModal()
     

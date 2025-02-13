@@ -27,6 +27,10 @@ export default function Tracker() {
   const [completedToggle, setCompletedToggle] = useState(false)
 
   useEffect(() => {
+    console.log('tracker component has received updated moreModalIndex', moreModalIndex)
+  }, [moreModalIndex])
+
+  useEffect(() => {
     const fetchUserData = async () => {
       if (user && user.uid) {
         try {
