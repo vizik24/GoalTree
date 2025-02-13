@@ -23,7 +23,7 @@ import GoalContainer from "./GoalContainer"
 import OverdueGoalContainer from "./OverdueGoalContainer";
 
 
-export default function PanelView({goals, setGoals, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex}) {
+export default function PanelView({goals, setGoals, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex, setMoreModalIndex, showMoreModal}) {
     const today = new Date()
 
     // get current year
@@ -50,10 +50,10 @@ export default function PanelView({goals, setGoals, addChildGoal, addChildGoalPa
 
                 {/* pass only the goals to each container that match the period */}
                 {/* <GoalContainer goals={goals} setGoals={setGoals} periodCat='fiveYear' period={fiveYearString} handleNewGoalCLick={handleNewGoalCLick}/> */}
-                <GoalContainer goals={goals} setGoals={setGoals} periodCat='year' period={year} highlightGoalIndex={highlightGoalIndex} setHighlightGoalIndex={setHighlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex}/>
-                <GoalContainer goals={goals} setGoals={setGoals} periodCat='month' period={month} highlightGoalIndex={highlightGoalIndex} setHighlightGoalIndex={setHighlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex}/>
-                <GoalContainer goals={goals} setGoals={setGoals} periodCat='day' period={day} highlightGoalIndex={highlightGoalIndex} setHighlightGoalIndex={setHighlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex}/>
-                <OverdueGoalContainer goals={goals} setGoals={setGoals} highlightGoalIndex={highlightGoalIndex} setHighlightGoalIndex={setHighlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex}/>
+                <GoalContainer goals={goals} setGoals={setGoals} periodCat='year' period={year} highlightGoalIndex={highlightGoalIndex} setHighlightGoalIndex={setHighlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex} setMoreModalIndex={setMoreModalIndex} showMoreModal={showMoreModal}/>
+                <GoalContainer goals={goals} setGoals={setGoals} periodCat='month' period={month} highlightGoalIndex={highlightGoalIndex} setHighlightGoalIndex={setHighlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex} setMoreModalIndex={setMoreModalIndex} showMoreModal={showMoreModal}/>
+                <GoalContainer goals={goals} setGoals={setGoals} periodCat='day' period={day} highlightGoalIndex={highlightGoalIndex} setHighlightGoalIndex={setHighlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex} setMoreModalIndex={setMoreModalIndex} showMoreModal={showMoreModal}/>
+                <OverdueGoalContainer goals={goals} setGoals={setGoals} highlightGoalIndex={highlightGoalIndex} setHighlightGoalIndex={setHighlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex} setMoreModalIndex={setMoreModalIndex} showMoreModal={showMoreModal}/>
 
                 </div>
                 </div>

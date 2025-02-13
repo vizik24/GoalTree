@@ -28,7 +28,7 @@ import { useState, useRef, useEffect } from "react";
 import MoreModal from "./MoreModal";
 
 
-export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoalIndex, setHighlightGoalIndex, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex}) {
+export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoalIndex, setHighlightGoalIndex, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex, setMoreModalIndex, showMoreModal}) {
 
   // todo - use auth context to only allow changes to goals if the user is signed in.
 
@@ -82,7 +82,9 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
 
   // function to handle motivation button clicked - display modal of current goal
   function viewMoreClicked(index) {
-    document.getElementById(`${index}-more-modal`).showModal()
+    setMoreModalIndex(index)
+    showMoreModal()
+    
   }
 
   // function to handle view parent clicked 
@@ -115,15 +117,7 @@ export default function Goal({ bigCard, goalIndex, goals, setGoals, highlightGoa
 
     return (
       <>
-      {/*add motivation modal to the dom so it can be displayed on click of a button */}
-      <MoreModal 
-        title={title} description={description} motivation={motivation} priority={priority}
-        parentGoalIndex={parentGoal} index={index} setGoals={setGoals} goals={goals}>
-
-      </MoreModal>
-
-
-
+      
       <div className={goalClassName}>
         {/* if completed is true render the title with a line through it */}
       

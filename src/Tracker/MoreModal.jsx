@@ -22,8 +22,11 @@ import DeleteModal from "./DeleteModal";
 import EditButton from "./EditButton"
 import EditModal from "./EditModal";
 
-export default function MoreModal({ title, description, motivation, priority, parentGoalIndex, index, setGoals, goals }) {
-  
+export default function MoreModal({setGoals, goals, index }) {
+
+  console.log('more modal goal index', index)
+
+
   return (
     <>
     {/* add edit modals to the dom so we can display them when eddit button is pressed. */}
@@ -41,19 +44,19 @@ export default function MoreModal({ title, description, motivation, priority, pa
           <div className="flex justify-start">
           <DeleteButton index={index} setGoals={setGoals} />
           </div>
-          <h3 className="font-bold text-lg">{title}</h3>
+          <h3 className="font-bold text-lg">{goals[index].title}</h3>
           <div className="flex justify-end">
           <EditButton index={index} setGoals={setGoals} goals={goals} />
           </div>
 
         </div>
-        <p className="py-2 text-sm text-neutral-500">{description}</p>
+        <p className="py-2 text-sm text-neutral-500">{goals[index].description}</p>
         <p className="py-2 text-m">Motivation:</p>
-        <p className="py-2 text-sm text-neutral-500">{ motivation ? motivation : 'Edit goal to add a motivation.'}</p>
+        <p className="py-2 text-sm text-neutral-500">{ goals[index].motivation ? goals[index].motivation : 'Edit goal to add a motivation.'}</p>
         <div className="modal-action">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-primary">Close</button>
+            <button className="btn btn-primary" onClick={() => document.getElementById(`${index}-more-modal`).close()}>Close</button>
           </form>
         </div>
       </div>

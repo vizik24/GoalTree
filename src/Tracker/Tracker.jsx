@@ -13,12 +13,14 @@ import ShareButton from "./ShareButton"
 import ShowCompletedToggle from "./ShowCompletedToggle"
 
 import { getUserData, updateFsGoals } from "./firestore"
+import MoreModal from "./MoreModal"
 
 export default function Tracker() {
   const { user } = useAuth()
   const [goals, setGoals] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [addChildGoalParentIndex, setAddChildGoalParentIndex] = useState("0")
+  const [moreModalIndex, setMoreModalIndex] = useState("0")
   const [zoom, setZoom] = useState(1)
   const [completedToggle, setCompletedToggle] = useState(false)
 
@@ -79,6 +81,10 @@ export default function Tracker() {
     document.getElementById("NewChildGoalModal").showModal()
   }
 
+  const showMoreModal = () => {
+    document.getElementById(`${moreModalIndex}-more-modal`).showModal()
+  }
+
   const handleZoomIn = () => {
     setZoom((prevZoom) => Math.min(prevZoom * 1.2, 3))
   }
@@ -98,6 +104,8 @@ export default function Tracker() {
       addChildGoal={addChildGoal}
       addChildGoalParentIndex={addChildGoalParentIndex}
       setAddChildGoalParentIndex={setAddChildGoalParentIndex}
+      showMoreModal={showMoreModal}
+      setMoreModalIndex={setMoreModalIndex}
     />
   )
 
@@ -117,6 +125,8 @@ export default function Tracker() {
         addChildGoalParentIndex={addChildGoalParentIndex}
         setAddChildGoalParentIndex={setAddChildGoalParentIndex}
         showCompleted={completedToggle}
+        showMoreModal={showMoreModal}
+        setMoreModalIndex={setMoreModalIndex}
       />
     </>
   )
@@ -142,6 +152,7 @@ export default function Tracker() {
         </div>
         <NewChildGoalModal goals={goals} setGoals={setGoals} passedParentGoal={addChildGoalParentIndex} />
         <NewGoalModal goals={goals} setGoals={setGoals} />
+        <MoreModal goals={goals} setGoals={setGoals} index={moreModalIndex}/>
         <Tabs Component1={panelView} Component2={treeView} />
       </div>
     </>

@@ -44,6 +44,8 @@ function TreeView({
   zoom,
   bigCards = true,
   showCompleted = true,
+  showMoreModal,
+  setMoreModalIndex,
 }) {
   const [treeData, setTreeData] = useState(null)
   const [isPanning, setIsPanning] = useState(false)
@@ -201,6 +203,8 @@ function TreeView({
                   setGoals={setGoals}
                   setHighlightGoalIndex={setHighlightGoalIndex}
                   highlightGoalIndex={highlightGoalIndex}
+                  showMoreModal={showMoreModal}
+                  setMoreModalIndex={setMoreModalIndex}
                 />
               </div>
             </foreignObject>

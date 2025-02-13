@@ -26,7 +26,7 @@
 import React from "react";
 import Goal from "./Goal";
 
-export default function GoalContainer({ periodCat, period, goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex }) {
+export default function GoalContainer({ periodCat, period, goals, setGoals, setHighlightGoalIndex, highlightGoalIndex, addChildGoal, addChildGoalParentIndex, setAddChildGoalParentIndex, setMoreModalIndex, showMoreModal }) {
     
     // Ensure period is a string
     period = period.toString();
@@ -68,7 +68,7 @@ export default function GoalContainer({ periodCat, period, goals, setGoals, setH
                     </div>
                 </div>
                 {filteredGoals.map((goal) => (
-                    <Goal bigCard={true} key={goal.index} goalIndex={goal.index} goals={goals} setGoals={setGoals} setHighlightGoalIndex={setHighlightGoalIndex} highlightGoalIndex={highlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex}/>
+                    <Goal bigCard={true} key={goal.index} goalIndex={goal.index} goals={goals} setGoals={setGoals} setHighlightGoalIndex={setHighlightGoalIndex} highlightGoalIndex={highlightGoalIndex} addChildGoal={addChildGoal} addChildGoalParentIndex={addChildGoalParentIndex} setAddChildGoalParentIndex={setAddChildGoalParentIndex} setMoreModalIndex={setMoreModalIndex} showMoreModal={showMoreModal}/>
                 ))}
             </div>
         </div>
