@@ -55,9 +55,7 @@ function SignUpForm() {
                     {error && <p className="text-red-500">{error}</p>}
                     <form onSubmit={handleSignUp}>
                         <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Name</span>
-                            </label>
+                            
                             <input 
                                 type="text" 
                                 placeholder="Name" 
@@ -68,9 +66,7 @@ function SignUpForm() {
                             />
                         </div>
                         <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
+                            
                             <input 
                                 type="email" 
                                 placeholder="Email" 
@@ -81,9 +77,7 @@ function SignUpForm() {
                             />
                         </div>
                         <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
+                            
                             <input 
                                 type="password" 
                                 placeholder="Password" 

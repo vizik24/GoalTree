@@ -48,9 +48,7 @@ function LoginForm() {
                     {error && <p className="text-red-500">{error}</p>}
                     <form onSubmit={handleLogin}>
                         <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
+                            
                             <input 
                                 type="email" 
                                 placeholder="Email" 
@@ -61,9 +59,7 @@ function LoginForm() {
                             />
                         </div>
                         <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
+                            
                             <input 
                                 type="password" 
                                 placeholder="Password" 
