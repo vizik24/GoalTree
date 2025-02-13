@@ -1,6 +1,6 @@
 
 /**
- * NewGoalModal component that allows users to add new goals with various attributes.
+ * NewGoalModal component that allows users to add new goals with various attributes. Sets the parent goal to itself.
  * 
  * The following is handled in this component:
  *  - Manage state for goal attributes such as title, description, priority, motivation, and parent goal.
@@ -29,35 +29,6 @@ function NewGoalModal({ goals, setGoals}) {
   const [priority, setPriority] = useState("1");
   const [motivation, setMotivation] = useState("");
 
-  // filter goals to goals that have not expired (for selecting parent goal)
-  const filteredGoals = () => {
-    // create new date object
-    const today = new Date();
-    // get current year 
-    const currentYear = today.getFullYear();
-    // get current month in 2 digit format
-    const currentMonth = (today.getMonth() + 1).toString().padStart(2, '0');
-
-    // filter the goals array based on the goalPeriodCategory of each goal.
-    // return goals that haven't expired.
-    return goals.filter((goal) => {
-      if (goal.goalPeriodCat === 'day') {
-        return goal.goalPeriod >= today;
-      }
-      else if (goal.goalPeriodCat === 'month') {
-        return goal.goalPeriod >= currentMonth;
-      } else if (goal.goalPeriodCat === 'year') {
-        return goal.goalPeriod >= currentYear;
-      }
-      return [''];
-    });
-  }
-
-  // function to handle parent goal when it is selected.
-  function handleParentGoalSelected(value) {
-    setParentGoal(value)
-    console.log('parent goal selected 99', value)
-  }
 
   // Function to add a goal. Adds a new goal to the goals array.
   function addGoal(newGoalObject) {
@@ -182,7 +153,7 @@ function NewGoalModal({ goals, setGoals}) {
     <>
       <dialog id="NewGoalModal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Add New Goal</h3>
+          <h3 className="font-bold text-lg">Create First Goal</h3>
           <div className="modal-action justify-center">
             <div className="flex flex-col w-full">
               <form method="dialog">
@@ -308,30 +279,6 @@ function NewGoalModal({ goals, setGoals}) {
                     </div>
                   </div>
                 </div>
-
-                {/* parent goal selection */}
-                                <div className="collapse collapse-arrow join-item border-base-300 border">
-                                      <input type="radio" name="parent-goal-accordian" />
-                                      <div className="collapse-title text-xl font-medium">
-                                        Parent Goal
-                                      </div>
-                                      <div className="collapse-content">
-                                        {/* radio buttons with goal cards */}
-                                        {filteredGoals().map((goal) => (
-                                          <label key={goal.index} className="flex items-center space-x-2">
-                                            <input
-                                              type="radio"
-                                              name="goal"
-                                              value={goal.index}
-                                              onChange={(e) => handleParentGoalSelected(e.target.value)}
-                                            />
-                                            <Goal bigCard={false} goalIndex={goal.index} goals={goals} setGoals={setGoals} />
-                                          </label>
-                                        ))}
-                                        
-                                      </div>
-                                    </div>
-                
 
                 <div className="flex justify-center gap-4">
                   <button

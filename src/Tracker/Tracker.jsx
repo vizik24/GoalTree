@@ -131,9 +131,9 @@ export default function Tracker() {
       <div className="bg-base-200 p-10 min-h-screen">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="space-x-4 md:space-y-2 md:space-x-4">
-            <NewGoalButton handleNewGoalClick={handleNewGoalClick} />
+            {goals.length == 0 ? <NewGoalButton handleNewGoalClick={handleNewGoalClick} /> : null }
           </div>
-          <div className="mt-4 md:mt-0">
+          <div className="mt-4 md:mt-0 space-x-4">
             <Link to="/contact">
               <button className="btn btn-neutral">Feedback</button>
             </Link>
