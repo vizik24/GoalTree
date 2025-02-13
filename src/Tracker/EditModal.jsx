@@ -17,8 +17,17 @@ import { useAuth } from "../context/AuthContext";
 
 function EditModal({ goals, setGoals, index }) {
 
+  const deletedGoal = {
+    title: 'Goal was deleted',
+    description: 'Goal was deleted',
+    motivation: 'Goal was deleted',
+    priority: null,
+    goalPeriodCat: null,
+    parentGoal: null,
+  }
+
   // filter the goals array to get the current goal
-  let currentGoal = goals.find((g) => g.index == index);
+  let currentGoal = goals.find((g) => g.index == index) ? goals.find((g) => g.index == index) : deletedGoal;
 
   
   // Define state variables for form fields with initial values from currentGoal

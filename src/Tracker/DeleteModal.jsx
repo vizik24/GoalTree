@@ -17,10 +17,24 @@
  *
  * @returns {JSX.Element} The rendered MotivationModal component.
  */
+
+import { deleteGoal } from "./firestore";
+import { useAuth } from "../context/AuthContext";
+
  
  export default function DeleteModal({ setGoals, index  }) {
+  // get current user id
+  const { user } = useAuth()
+
+      
       // function to handle delete clicked - updates goals state variable.
       function handleDeleteClicked() {
+        
+        // first delete the goal from firestore to make sure its gone.
+        
+        deleteGoal(user.uid, index)
+
+        // then delete it from the state to make sure it doesn't get readded somehow. (also triggers UI updates)
         setGoals(prevGoals => prevGoals.filter(g => g.index !== index));
     
         
