@@ -23,7 +23,7 @@ function NewGoalModal({ goals, setGoals }) {
   const [goalPeriod, setGoalPeriod] = useState("2025");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [parentGoal, setParentGoal] = useState("0");
+  const [parentGoal, setParentGoal] = useState(0);
   const [priority, setPriority] = useState("1");
   const [motivation, setMotivation] = useState("");
 
