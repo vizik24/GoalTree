@@ -52,7 +52,7 @@ function LoginForm() {
                             <input 
                                 type="email" 
                                 placeholder="Email" 
-                                className="input input-bordered" 
+                                className="input input-bordered my-2" 
                                 value={email} 
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
@@ -63,7 +63,7 @@ function LoginForm() {
                             <input 
                                 type="password" 
                                 placeholder="Password" 
-                                className="input input-bordered" 
+                                className="input input-bordered my-2" 
                                 value={password} 
                                 onChange={(e) => setPassword(e.target.value)}
                                 required

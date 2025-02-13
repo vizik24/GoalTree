@@ -59,7 +59,7 @@ function SignUpForm() {
                             <input 
                                 type="text" 
                                 placeholder="Name" 
-                                className="input input-bordered" 
+                                className="input input-bordered my-2" 
                                 value={name} 
                                 onChange={(e) => setName(e.target.value)}
                                 required
@@ -70,13 +70,13 @@ function SignUpForm() {
                             <input 
                                 type="email" 
                                 placeholder="Email" 
-                                className="input input-bordered" 
+                                className="input input-bordered my-2" 
                                 value={email} 
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
                         </div>
-                        <div className="form-control">
+                        <div className="form-control my-2">
                             <input 
                                 type="password" 
                                 placeholder="Password" 
