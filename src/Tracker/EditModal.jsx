@@ -16,6 +16,9 @@ import { updateGoalProperties } from "./firestore";
 import { useAuth } from "../context/AuthContext";
 
 function EditModal({ goals, setGoals, index }) {
+  console.log('edit modal received index', index)
+
+
 
   const deletedGoal = {
     title: 'Goal was deleted',
@@ -38,6 +41,19 @@ function EditModal({ goals, setGoals, index }) {
   const [goalPeriodCat, setGoalPeriodCat] = useState(currentGoal.goalPeriodCat);
   const [goalPeriod, setGoalPeriod] = useState(currentGoal.goalPeriod);
   const [parentGoal, setParentGoal] = useState(currentGoal.parentGoal);
+
+  useEffect(() => {
+    setTitle(currentGoal.title)
+    setDescription(currentGoal.description)
+    setMotivation(currentGoal.motivation)
+    setPriority(currentGoal.priority)
+    setGoalPeriod(currentGoal.goalPeriodCat)
+    setGoalPeriod(currentGoal.setGoalPeriod)
+
+    console.log('editing a goal. goalPeriod is:', goalPeriod)
+    console.log('editing a goal. goalPeriodCat is:', goalPeriodCat)
+
+  }, [index, goals.length])
 
 
   // Create a new Date object for the current date and time

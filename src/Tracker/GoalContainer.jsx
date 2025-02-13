@@ -40,8 +40,8 @@ export default function GoalContainer({ periodCat, period, goals, setGoals, setH
 
     // Filter goals to match only those that are for today's date when periodCat is 'day'
     const filteredGoals = goals.filter(goal => {
-        if (goal.goalPeriodCat !== periodCat) return false;
-
+        if (goal.goalPeriodCat !== periodCat) return false;        
+        
         const goalPeriod = goal.goalPeriod.toString();
         switch (periodCat) {
             case 'year':

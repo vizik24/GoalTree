@@ -54,7 +54,7 @@ export default function MoreModal({setGoals, goals, index }) {
           </div>
           <h3 className="font-bold text-lg">{title}</h3>
           <div className="flex justify-end">
-          <EditButton index={index} setGoals={setGoals} goals={goals} />
+          {/* <EditButton index={index} setGoals={setGoals} goals={goals} /> */}
           </div>
 
         </div>
