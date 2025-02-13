@@ -24,7 +24,7 @@ function NewChildGoalModal({ goals, setGoals, passedParentGoal }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [parentGoal, setParentGoal] = useState(passedParentGoal);
-  const [priority, setPriority] = useState("1");
+  const [priority, setPriority] = useState(1);
   const [motivation, setMotivation] = useState("");
 
   useEffect(() => {
@@ -151,8 +151,8 @@ function NewChildGoalModal({ goals, setGoals, passedParentGoal }) {
     setTitle("");
     setDescription("");
     setMotivation("");
-    setParentGoal("");
-    setPriority("1");
+    setParentGoal(passedParentGoal);
+    setPriority(1);
   };
 
   // useEffect to log goals array after it updates
