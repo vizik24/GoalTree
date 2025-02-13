@@ -11,6 +11,8 @@ import ZoomControls from "./ZoomControls"
 import NewChildGoalModal from "./NewChildGoalModal"
 import ShareButton from "./ShareButton"
 import ShowCompletedToggle from "./ShowCompletedToggle"
+import EditModal from "./EditModal"
+import DeleteModal from "./DeleteModal"
 
 import { getUserData, updateFsGoals } from "./firestore"
 import MoreModal from "./MoreModal"
@@ -153,6 +155,11 @@ export default function Tracker() {
         <NewChildGoalModal goals={goals} setGoals={setGoals} passedParentGoal={addChildGoalParentIndex} />
         <NewGoalModal goals={goals} setGoals={setGoals} />
         <MoreModal goals={goals} setGoals={setGoals} index={moreModalIndex}/>
+        {/* add edit modals to the dom so we can display them when eddit button is pressed. */}
+        <EditModal goals={goals} index={moreModalIndex} setGoals={setGoals}></EditModal>
+
+        {/* add delete modal to the dom so we can display them when edit button is pressed */}
+        <DeleteModal setGoals={setGoals} index={moreModalIndex}></DeleteModal>
         <Tabs Component1={panelView} Component2={treeView} />
       </div>
     </>

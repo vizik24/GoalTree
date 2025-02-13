@@ -19,8 +19,8 @@ function EditModal({ goals, setGoals, index }) {
 
   // filter the goals array to get the current goal
   let currentGoal = goals.find((g) => g.index == index);
-  
 
+  
   // Define state variables for form fields with initial values from currentGoal
   const [title, setTitle] = useState(currentGoal.title);
   const [description, setDescription] = useState(currentGoal.description);
@@ -124,53 +124,36 @@ function EditModal({ goals, setGoals, index }) {
           <h3 className="font-bold text-lg">Edit Goal</h3>
           <div className="modal-action justify-center">
             <div className="flex flex-col w-full">
-              <form method="dialog">
-                <label className="form-control">
-                  <div className="label">
-                    <span className="label-text">Title</span>
-                  </div>
-                  <textarea
-                    className="textarea textarea-bordered h-1 resize-none"
-                    defaultValue={currentGoal.title}
-                    onChange={(e) => setTitle(e.target.value)}
-                  ></textarea>
-                </label>
+            <form method="dialog">
+                <input
+                  className="input w-full"
+                  placeholder="Title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                ></input>
 
-                <label className="form-control">
-                  <div className="label">
-                    <span className="label-text">Description</span>
-                  </div>
-                  <textarea
-                    className="textarea textarea-bordered h-24"
-                    defaultValue={currentGoal.description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  ></textarea>
-                </label>
+                <textarea
+                  className="textarea textarea-bordered h-24 my-2 w-full"
+                  placeholder="Description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
 
-                <label className="form-control">
-                  <div className="label">
-                    <span className="label-text">Motivation</span>
-                  </div>
-                  <textarea
-                    className="textarea textarea-bordered h-24"
-                    defaultValue={currentGoal.motivation}
-                    onChange={(e) => setMotivation(e.target.value)}
-                  ></textarea>
-                </label>
-
-                <label className="form-control w-full max-w-xs mb-4">
-                  <div className="label">
-                    <span className="label-text">Priority</span>
-                  </div>
-                  <input
-                    type="number"
-                    className="input input-bordered w-full max-w-xs"
-                    defaultValue={currentGoal.priority}
-                    onChange={(e) => setPriority(e.target.value)}
-                    min={1}
-                    max={3}
-                  />
-                </label>
+                <textarea
+                  className="textarea textarea-bordered h-24 my-2 w-full"
+                  placeholder="Motivation"
+                  value={motivation}
+                  onChange={(e) => setMotivation(e.target.value)}
+                ></textarea>
+                <input
+                  type="number"
+                  placeholder="Priority (1 - 3)"
+                  title="Priority (1 - 3)"
+                  className="input validator my-2 w-full"
+                  onChange={(e) => setPriority(e.target.value)}
+                  min={1}
+                  max={3}
+                />
 
                 <div>
                   <p className="label-text left-0 w-fit mb-3 ml-1">

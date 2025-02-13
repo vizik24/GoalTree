@@ -41,11 +41,6 @@ export default function MoreModal({setGoals, goals, index }) {
 
   return (
     <>
-    {/* add edit modals to the dom so we can display them when eddit button is pressed. */}
-    <EditModal goals={goals} index={goalIndex} setGoals={setGoals}></EditModal>
-
-    {/* add delete modal to the dom so we can display them when edit button is pressed */}
-    <DeleteModal setGoals={setGoals} index={goalIndex}></DeleteModal>
 
     <dialog
       id={`${index}-more-modal`}
