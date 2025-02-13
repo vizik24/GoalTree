@@ -1,76 +1,72 @@
-
-
 /**
  * NewChildGoalModal component for adding a new child goal.
- * 
+ *
  * The following is handled in this component:
  *  - Manage state for goal details such as title, description, priority, motivation, and parent goal.
  *  - Filter goals to display only those that have not expired for selecting a parent goal.
  *  - Handle changes to goal period based on selected category (year, month, day).
  *  - Add a new goal to the goals array and reset the form state.
- * 
+ *
  * @param {Object} props - The props object.
  * @param {Array} props.goals - Array of goal objects.
  * @param {Function} props.setGoals - Function to update the goals state.
  * @param {Object} props.passedParentGoal - The parent goal passed to the modal.
- * 
+ *
  * @returns {JSX.Element} The rendered NewChildGoalModal component.
  */
 import React, { useEffect, useState } from "react";
 
-function NewChildGoalModal({ goals, setGoals, passedParentGoal}) {
-    console.log('passed parent goal is:', passedParentGoal)
+function NewChildGoalModal({ goals, setGoals, passedParentGoal }) {
+  console.log("passed parent goal is:", passedParentGoal);
 
   const [goalPeriodCat, setGoalPeriodCat] = useState("year");
-  const [goalPeriod, setGoalPeriod] = useState('2025');
+  const [goalPeriod, setGoalPeriod] = useState("2025");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [parentGoal, setParentGoal] = useState(passedParentGoal)
+  const [parentGoal, setParentGoal] = useState(passedParentGoal);
   const [priority, setPriority] = useState("1");
   const [motivation, setMotivation] = useState("");
 
-useEffect(() => {
+  useEffect(() => {
     setParentGoal(passedParentGoal);
-    console.log('parent goal is',parentGoal)
-}, [passedParentGoal]);
+    console.log("parent goal is", parentGoal);
+  }, [passedParentGoal]);
 
   // filter goals to goals that have not expired (for selecting parent goal)
   const filteredGoals = () => {
     const today = new Date();
     const currentYear = today.getFullYear();
-    const currentMonth = (today.getMonth() + 1).toString().padStart(2, '0');
+    const currentMonth = (today.getMonth() + 1).toString().padStart(2, "0");
 
     return goals.filter((goal) => {
-      if (goal.goalPeriodCat === 'day') {
+      if (goal.goalPeriodCat === "day") {
         return goal.goalPeriod >= today;
-      }
-      else if (goal.goalPeriodCat === 'month') {
+      } else if (goal.goalPeriodCat === "month") {
         return goal.goalPeriod >= currentMonth;
-      } else if (goal.goalPeriodCat === 'year') {
+      } else if (goal.goalPeriodCat === "year") {
         return goal.goalPeriod >= currentYear;
       }
-      return [''];
+      return [""];
     });
-  }
+  };
 
   // function to handle parent goal when it is selected.
   function handleParentGoalSelected(value) {
-    setParentGoal(value)
-    console.log('parent goal selected 99', value)
+    setParentGoal(value);
+    console.log("parent goal selected 99", value);
   }
 
   // Function to add a goal. Adds a new goal to the goals array.
   function addGoal(newGoalObject) {
-    let newIndex = 0
+    let newIndex = 0;
     setGoals((prevGoals) => {
-      if (prevGoals.length >= 1){
+      if (prevGoals.length >= 1) {
         // set the index to the highest index in prevGoals
-        const highestIndex = Math.max(...prevGoals.map(goal => goal.index));
+        const highestIndex = Math.max(...prevGoals.map((goal) => goal.index));
         newIndex = highestIndex + 1;
-      }
-      else {
+      } else {
         // if there are no previous goals, set index to 0.
-        newIndex = 0
+        newIndex = 0;
       }
       const newGoals = [
         ...prevGoals,
@@ -84,65 +80,63 @@ useEffect(() => {
           motivation: newGoalObject.motivation,
           parentGoal: newGoalObject.parentGoal,
           completed: false, // completed will always be false when we first create the goal
-          completedDate: newGoalObject.completedDate,  
+          completedDate: newGoalObject.completedDate,
         },
       ];
       return newGoals;
     });
   }
 
-    // Create a new Date object for the current date and time
-    const today = new Date();
+  // Create a new Date object for the current date and time
+  const today = new Date();
 
-    // Get the current year
-    const currentYear = today.getFullYear();
+  // Get the current year
+  const currentYear = today.getFullYear();
 
-    // Get the current month (0 indexed) and format it
-    let currentMonth = (today.getMonth() + 1).toString().padStart(2, '0');
-    console.log('month test',today.getMonth().toString().padStart(2, '0'))
+  // Get the current month (0 indexed) and format it
+  let currentMonth = (today.getMonth() + 1).toString().padStart(2, "0");
+  console.log("month test", today.getMonth().toString().padStart(2, "0"));
 
-    // Get the current day of the month and format it
-    const currentDay = today.getDate().toString().padStart(2, '0');
+  // Get the current day of the month and format it
+  const currentDay = today.getDate().toString().padStart(2, "0");
 
-    // Correctly format the currentYearMonthDay
-    const currentYearMonthDay = `${currentYear}-${currentMonth}-${currentDay}`;
-    console.log('Todays date is:', currentYearMonthDay)
+  // Correctly format the currentYearMonthDay
+  const currentYearMonthDay = `${currentYear}-${currentMonth}-${currentDay}`;
+  console.log("Todays date is:", currentYearMonthDay);
 
-    // reassign current month to include the current year
-    currentMonth = `${currentYear}-${currentMonth}`
-    console.log('month test', currentMonth)
-
-
-
+  // reassign current month to include the current year
+  currentMonth = `${currentYear}-${currentMonth}`;
+  console.log("month test", currentMonth);
 
   // Function to set goal period according to which accordion is open.
   const handleRadioChange = (event) => {
-    let value = event.target.value
+    let value = event.target.value;
     setGoalPeriodCat(value);
     // update the goal period default value according to which radio was clicked
-    value == 'year' ? setGoalPeriod(currentYear) :
-    value == 'month' ? setGoalPeriod(currentMonth.toString()) :
-    setGoalPeriod(currentYearMonthDay)
+    value == "year"
+      ? setGoalPeriod(currentYear)
+      : value == "month"
+      ? setGoalPeriod(currentMonth.toString())
+      : setGoalPeriod(currentYearMonthDay);
   };
 
   const handleYearChange = (event) => {
     const newYear = event.target.value;
     setGoalPeriod(newYear);
-    console.log('Goal Period changed to', newYear);  // Log the new value directly
-  }
-  
+    console.log("Goal Period changed to", newYear); // Log the new value directly
+  };
+
   const handleMonthChange = (event) => {
     const newMonth = event.target.value;
     setGoalPeriod(newMonth);
-    console.log('Goal Period changed to', newMonth);  // Log the new value directly
-  }
-  
+    console.log("Goal Period changed to", newMonth); // Log the new value directly
+  };
+
   const handleDayChange = (event) => {
     const newDay = event.target.value;
     setGoalPeriod(newDay);
-    console.log('Goal Period changed to', newDay);  // Log the new value directly
-  }
-  
+    console.log("Goal Period changed to", newDay); // Log the new value directly
+  };
 
   // Function to handle save clicked, creates the new goal object and adds it.
   const handleSave = () => {
@@ -154,19 +148,17 @@ useEffect(() => {
       priority,
       motivation,
       parentGoal: parentGoal,
-      completedDate: '',
+      completedDate: "",
     };
     addGoal(newGoalObject);
     // reset state to empty
-    setGoalPeriodCat('year')
-    setGoalPeriod('2025')
-    setTitle('')
-    setDescription('')
-    setMotivation('')
-    setParentGoal('')
-    setPriority('1')
-
-
+    setGoalPeriodCat("year");
+    setGoalPeriod("2025");
+    setTitle("");
+    setDescription("");
+    setMotivation("");
+    setParentGoal("");
+    setPriority("1");
   };
 
   // useEffect to log goals array after it updates
@@ -176,77 +168,65 @@ useEffect(() => {
 
   return (
     <>
-      <dialog id="NewChildGoalModal" className="modal modal-bottom sm:modal-middle">
+      <dialog
+        id="NewChildGoalModal"
+        className="modal modal-bottom sm:modal-middle"
+      >
         <div className="modal-box">
           <h3 className="font-bold text-lg">Add New Child Goal</h3>
           <div className="modal-action justify-center">
             <div className="flex flex-col w-full">
               <form method="dialog">
-                <label className="form-control">
-                  <div className="label">
-                    <span className="label-text">Title</span>
-                  </div>
-                  <textarea
-                
-                    className="textarea textarea-bordered h-1 resize-none"
-                    placeholder="Keep the kitchen clean"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                  ></textarea>
-                </label>
+                <input
+                  className="input w-full"
+                  placeholder="Title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                ></input>
 
-                <label className="form-control">
-                  <div className="label">
-                    <span className="label-text">Description</span>
-                  </div>
-                  <textarea
-     
-                    className="textarea textarea-bordered h-24"
-                    placeholder="Put the dishes away, wipe the counters, and sweep the floor."
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  ></textarea>
-                </label>
+                <textarea
+                  className="textarea textarea-bordered h-24 my-2 w-full"
+                  placeholder="Description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
 
-                <label className="form-control">
-                  <div className="label">
-                    <span className="label-text">Motivation</span>
-                  </div>
-                  <textarea
-                    className="textarea textarea-bordered h-24"
-                    placeholder="I want guests to think I am always tidy."
-                    value={motivation}
-                    onChange={(e) => setMotivation(e.target.value)}
-                  ></textarea>
-                </label>
-
-                <label className="form-control w-full max-w-xs mb-4">
-                          <div className="label">
-                            <span className="label-text">Priority</span>
-                          </div>
-                          <input
-                            type="number"
-                            placeholder={1}
-                            className="input input-bordered w-full max-w-xs"
-                            defaultValue={1}
-                            onChange={(e) => setPriority(e.target.value)}
-                            min={1}
-                            max={3}
-                          />
-                        </label>
+                <textarea
+                  className="textarea textarea-bordered h-24 my-2 w-full"
+                  placeholder="Motivation"
+                  value={motivation}
+                  onChange={(e) => setMotivation(e.target.value)}
+                ></textarea>
+                <input
+                  type="number"
+                  placeholder="Priority (1 - 3)"
+                  title="Priority (1 - 3)"
+                  className="input validator my-2 w-full"
+                  onChange={(e) => setPriority(e.target.value)}
+                  min={1}
+                  max={3}
+                />
 
                 <div>
-                  <p className="label-text left-0 w-fit mb-3 ml-1">Make this goal a:</p>
+                  <p className="label-text left-0 w-fit my-2 ml-1">
+                    Make this goal a:
+                  </p>
                   <div className="join join-vertical w-full mb-8">
                     <div className="collapse collapse-arrow join-item border-base-300 border">
-                      <input defaultChecked type="radio" name="my-accordion-4" value={'year'} onChange={handleRadioChange} />
+                      <input
+                        defaultChecked
+                        type="radio"
+                        name="my-accordion-4"
+                        value={"year"}
+                        onChange={handleRadioChange}
+                      />
                       <div className="collapse-title text-xl font-medium">
                         Yearly Goal
                       </div>
                       <div className="collapse-content">
                         <label className="form-control w-full max-w-xs">
                           <div className="label">
-                            <span className="label-text">Year</span>
+                            <span className="label-text mr-2">Year</span>
                           </div>
                           <input
                             type="number"
@@ -260,14 +240,19 @@ useEffect(() => {
                       </div>
                     </div>
                     <div className="collapse collapse-arrow join-item border-base-300 border">
-                      <input type="radio" name="my-accordion-4" value={'month'} onChange={handleRadioChange} />
+                      <input
+                        type="radio"
+                        name="my-accordion-4"
+                        value={"month"}
+                        onChange={handleRadioChange}
+                      />
                       <div className="collapse-title text-xl font-medium">
                         Monthly Goal
                       </div>
                       <div className="collapse-content">
                         <label className="form-control w-full max-w-xs">
                           <div className="label">
-                            <span className="label-text">Month</span>
+                            <span className="label-text mr-2">Month</span>
                           </div>
                           <input
                             type="month"
@@ -281,14 +266,19 @@ useEffect(() => {
                       </div>
                     </div>
                     <div className="collapse collapse-arrow join-item border-base-300 border">
-                      <input type="radio" name="my-accordion-4" value={'day'} onChange={handleRadioChange} />
+                      <input
+                        type="radio"
+                        name="my-accordion-4"
+                        value={"day"}
+                        onChange={handleRadioChange}
+                      />
                       <div className="collapse-title text-xl font-medium">
                         Daily Goal
                       </div>
                       <div className="collapse-content">
                         <label className="form-control w-full max-w-xs">
                           <div className="label">
-                            <span className="label-text">Date</span>
+                            <span className="label-text mr-2">Date</span>
                           </div>
                           <input
                             type="date"
@@ -297,7 +287,6 @@ useEffect(() => {
                             defaultValue={currentYearMonthDay}
                             value={goalPeriod}
                             onChange={handleDayChange}
-
                           />
                         </label>
                       </div>
@@ -306,7 +295,7 @@ useEffect(() => {
                 </div>
 
                 {/* parent goal selection */}
-                                {/* <div className="collapse collapse-arrow join-item border-base-300 border">
+                {/* <div className="collapse collapse-arrow join-item border-base-300 border">
                                       <input type="radio" name="parent-goal-accordian" />
                                       <div className="collapse-title text-xl font-medium">
                                         Parent Goal
@@ -327,18 +316,16 @@ useEffect(() => {
                                         
                                       </div>
                                     </div> */}
-                
 
                 <div className="flex justify-center gap-4">
-                  <button
-                    onClick={handleSave}
-                    className="btn-primary btn"
-                  >
+                  <button onClick={handleSave} className="btn-primary btn">
                     Save
                   </button>
                   <button
                     className="btn-neutral btn"
-                    onClick={() => document.getElementById("NewChildGoalModal").close()}
+                    onClick={() =>
+                      document.getElementById("NewChildGoalModal").close()
+                    }
                   >
                     Cancel
                   </button>

@@ -1,0 +1,20 @@
+
+.gradient-background {
+    background: linear-gradient(300deg, #64aafa,#00d390, #3890f6, #e6687a );
+    background-size: 240% 240%;
+    animation: gradient-animation 8s ease infinite;
+    opacity: 0.6; /* Adjust the value to control the fade level */
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+  
