@@ -33,9 +33,9 @@ export default function MoreModal({setGoals, goals, index }) {
 
   // re render title, description, motivation if goals state changes
   useEffect( () => {
-    setTitle(goals[index] ? goals[index].title : '')
-    setDescription(goals[index] ? goals[index].description : '')
-    setMotivation(goals[index] ? goals[index].motivation : 'Edit goal to add a motivation.')
+    setTitle(goals[index] ? goals[index].title : 'deleted goal')
+    setDescription(goals[index] ? goals[index].description : 'deleted goal')
+    setMotivation(goals[index] ? goals[index].motivation : 'deleted goal')
     setGoalIndex(goals[index] ? index : null)
   }, [goals.length, index])
 
