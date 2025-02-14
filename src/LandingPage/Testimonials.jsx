@@ -61,8 +61,9 @@ export function Testimonials({ title, testimonials }) {
     <section className="py-16 bg-base-100" id="testimonials">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12">{title}</h2>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 items-center">
           {testimonials.map((testimonial, index) => (
+            <div className="items-center flex justify-center"> 
               <AnimateOnScroll initialClass="scroll-animation" animationClass="visible" delay={index*500}>
 
             <ReviewCard 
@@ -72,6 +73,7 @@ export function Testimonials({ title, testimonials }) {
               reviewScore={testimonial.rating}
               reviewText={testimonial.content}/>
               </AnimateOnScroll>
+              </div>
           ))}
         </div>
       </div>
