@@ -119,13 +119,13 @@ const testimonialsData = {
       content:
         "I’ve tried so many productivity apps, but GoalsTree is the first one that actually keeps me accountable.",
       name: "Sarah K.",
-      role: "CTO, Tech Innovators",
+      role: "",
       rating: 5,
     },
     {
       content: "Seeing my goal as a tree instead of just a list made all the difference. I finally feel in control of my progress.",
       name: "Michael R.",
-      role: "Product Manager, StartUp Inc.",
+      role: "",
       rating: 5,
     },
   ],
