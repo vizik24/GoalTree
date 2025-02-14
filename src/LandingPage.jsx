@@ -26,7 +26,8 @@ const heroData = {
     text: "Watch Demo",
     href: "#demo",
   },
-  demoImageUrl: "/placeholder.svg?height=600&width=1200",
+  demoImageUrl: "",
+  demoVideoUrl: "/goals_tree_demo.mov",
 };
 
 const featuresData = {
@@ -167,6 +168,7 @@ export default function LandingPage() {
           secondaryButton={heroData.secondaryButton}
           description={heroData.description}
           demoImageUrl={heroData.demoImageUrl}
+          demoVideoUrl={heroData.demoVideoUrl}
         />
       </AnimateOnScroll>
       <AnimateOnScroll initialClass="scroll-animation" animationClass="visible">
