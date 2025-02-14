@@ -2,6 +2,11 @@ import { Link } from "react-router-dom";
 import CtaButton from "./CtaButton";
 
 export function Hero({ title, highlightedTitle, primaryButton, secondaryButton, description, demoImageUrl, demoVideoUrl }) {
+  
+  function playVideo() {
+    document.getElementById('demo').play()
+  }
+  
   return (
     <section className="pt-24 pb-12 md:pt-32 md:pb-20">
       <div className="container mx-auto px-4 text-center">
@@ -13,7 +18,7 @@ export function Hero({ title, highlightedTitle, primaryButton, secondaryButton, 
         <div className="flex flex-col sm:flex-row justify-center gap-4">
         <CtaButton />
       <Link to={`/${secondaryButton.href}`}>
-      <button className="btn btn-secondary">{secondaryButton.text}</button>
+      <button onClick={playVideo} className="btn btn-secondary">{secondaryButton.text}</button>
       </Link>
         </div>
         <section >
