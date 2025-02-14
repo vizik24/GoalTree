@@ -53,7 +53,7 @@ const featuresData = {
 const solutionData = {
   title: "How Goal Tree Helps You Achieve More",
   description: "Most goal-setting apps focus on lists. But lists don’t show how to get from A to B. GoalsTree maps out your goal as a structured hierarchy, starting with your big ambition and breaking it down into clear, actionable steps.",
-  imageUrl: "/placeholder.svg?height=600&width=1200",
+  imageUrl: "/goal_tree.jpg",
   stats: [
     { value: "1,000+", label: "Goals achieved every day with GoalsTree." },  
     { value: "8/10", label: "People find it easier to take action when they can visualize their progress." },  
