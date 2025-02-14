@@ -46,41 +46,32 @@ function ContactForm() {
                 <h1 className='text-5xl font-bold mb-10'>Get in touch</h1>
                 <p className='mb-10'>We'll make it our goal to get back to you.</p>
                     <form onSubmit={handleSubmit} className="form-control w-full max-w-md mx-auto">
-                        <label className="label">
-                            <span className="label-text">Name</span>
-                        </label>
                         <input 
                             type="text"
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
                             placeholder="Your name"
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full my-2"
                             required
                         />
                         
-                        <label className="label">
-                            <span className="label-text">Email</span>
-                        </label>
                         <input 
                             type="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
                             placeholder="Your email"
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full my-2"
                             required
                         />
                         
-                        <label className="label">
-                            <span className="label-text">Message</span>
-                        </label>
                         <textarea 
                             name="message"
                             value={formData.message}
                             onChange={handleChange}
                             placeholder="Your message"
-                            className="textarea textarea-bordered h-24"
+                            className="textarea textarea-bordered h-24 w-full my-2"
                             required
                         ></textarea>
                         
