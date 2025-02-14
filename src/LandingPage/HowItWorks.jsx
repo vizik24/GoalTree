@@ -10,7 +10,7 @@ export function HowItWorks({ title, steps }) {
               <AnimateOnScroll initialClass="scroll-animation" animationClass="visible" delay={index*300}>
 
               <div key={index} className="text-center">
-                <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                <div className="w-12 h-12 rounded-full bg-secondary/10 text-secondary flex items-center justify-center text-xl font-bold mx-auto mb-4">
                   {step.number}
                 </div>
                 <h3 className="font-semibold mb-2">{step.title}</h3>

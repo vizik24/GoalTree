@@ -13,7 +13,7 @@ export function Benefits({ title, benefits }) {
               key={index}
               className="p-6 flex flex-col items-center text-center"
             >
-              <benefit.icon className="w-10 h-10 text-primary mb-4" />
+              <benefit.icon className="w-10 h-10 text-secondary mb-4" />
               <h3 className="font-semibold mb-2">{benefit.title}</h3>
               <p className="text-base-content">{benefit.description}</p>
             </div>

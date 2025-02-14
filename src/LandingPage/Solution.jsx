@@ -18,7 +18,7 @@ export function Solution({ title, description, imageUrl, stats }) {
               <AnimateOnScroll initialClass="scroll-animation" animationClass="visible" delay={index*300}>
 
               <div key={index} className="p-6 text-center">
-                <div className="text-3xl font-bold mb-2 text-primary">{stat.value}</div>
+                <div className="text-3xl font-bold mb-2 text-accent">{stat.value}</div>
                 <div className="text-base-content">{stat.label}</div>
               </div>
               </AnimateOnScroll>

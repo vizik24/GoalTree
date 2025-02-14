@@ -9,8 +9,8 @@ export function Features({ title, features }) {
             {features.map((feature, index) => (
               <AnimateOnScroll initialClass="scroll-animation" animationClass="visible" delay={index*300}>
               <div key={index} className="flex flex-col items-center text-center p-6">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                  <feature.icon className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 bg-secondary/5 rounded-full flex items-center justify-center mb-4">
+                  <feature.icon className="w-6 h-6 text-secondary" />
                 </div>
                 <h3 className="font-semibold mb-2">{feature.title}</h3>
                 <p className="text-base-content">{feature.description}</p>
