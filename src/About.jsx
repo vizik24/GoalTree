@@ -39,7 +39,7 @@ export default function About() {
           </p>
         </section>
 
-        <section className="my-12">
+        {/* <section className="my-12">
           <h2 className="text-3xl font-bold">Meet the Makers</h2>
           <br></br>
           <div className="flex gap-36">
@@ -57,7 +57,7 @@ export default function About() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="my-12">
           <h2 className="text-3xl font-bold">Get Started Today</h2>
