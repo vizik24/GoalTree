@@ -19,7 +19,7 @@ export default function Nav() {
           <ul className="menu menu-horizontal px-1">
             <li>
               <Link to='/tracker'>
-                <a className="text-primary">Early Access</a>
+                <a className="text-primary">Dashboard</a>
               </Link>
             </li>
             <li>

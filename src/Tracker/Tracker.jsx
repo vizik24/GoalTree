@@ -17,6 +17,8 @@ import DeleteModal from "./DeleteModal"
 import { getUserData, updateFsGoals } from "./firestore"
 import MoreModal from "./MoreModal"
 
+import AnalyticsDashboard from "./AnalyticsDashboard/AnalyticsDashboard"
+
 export default function Tracker() {
   const { user } = useAuth()
   const [goals, setGoals] = useState([])
@@ -137,6 +139,12 @@ export default function Tracker() {
     </>
   )
 
+  const analytics = () => (
+    <>
+    <AnalyticsDashboard goals={goals}></AnalyticsDashboard>
+    </>
+  )
+
   if (isLoading) {
     return <div>Loading...</div>
   }
@@ -164,7 +172,7 @@ export default function Tracker() {
 
         {/* add delete modal to the dom so we can display them when edit button is pressed */}
         <DeleteModal setGoals={setGoals} index={moreModalIndex}></DeleteModal>
-        <Tabs Component1={panelView} Component2={treeView} />
+        <Tabs Component1={panelView} Component2={treeView} Component3={analytics}/>
       </div>
     </>
   )
