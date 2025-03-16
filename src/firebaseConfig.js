@@ -4,15 +4,15 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getAnalytics } from 'firebase/analytics';
 
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyD9QmuezFvf-W_trTR3BE3i2_4n5-NzQF0",
-    authDomain: "goaltree-2c941.firebaseapp.com",
-    projectId: "goaltree-2c941",
-    storageBucket: "goaltree-2c941.appspot.com", // Corrected storage bucket URL
-    messagingSenderId: "755463001663",
-    appId: "1:755463001663:web:0435e02a43e3e2d7184a8a",
-    measurementId: "G-MQ7K2PTTRX"
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.FIREBASE_APP_ID,
+    measurementId: process.env.FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
